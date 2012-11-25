@@ -43,16 +43,18 @@ else:
 
 
 # Printing unaligned sequences
+print "Unaligned."
 for i, sequence in enumerate(sequences):
     print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
 # Aligning
 if (not exists("cached-aligned.fa")):
+    print "Aligning..."
     from Bio.Align.Applications import MafftCommandline
     import os
     os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
-    mafft_exe = "/usr/bin/mafft"
+    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
     in_file = "cached-unaligned.fa"
     mafft_cline = MafftCommandline(mafft_exe, input=in_file)
     stdout, stderr = mafft_cline()
@@ -61,8 +63,30 @@ if (not exists("cached-aligned.fa")):
     handle.close()
 
 # Printing aligned sequences
-print "Aligned..."
+print "Aligned."
 from Bio import AlignIO
 multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
 for i, record in enumerate(multiple_seq_alignment):
     print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
+    
+# Phylogenetic trees
+if (not exists("cached-aligned.aln")):
+    print "Prepairing trees (1/3)..."
+    from Bio.Align.Applications import MuscleCommandline
+    cmdline = MuscleCommandline(input="cached-aligned.fa", out="cached-aligned.aln", clw=True)
+    cmdline()
+if (not exists("cached-aligned.phy")):
+    print "Prepairing trees (2/3)..."
+    AlignIO.convert("cached-aligned.aln", "clustal", "cached-aligned.phy", "phylip-relaxed")
+
+if (not exists("cached-aligned.phy_phyml_tree.txt")):
+    print "Prepairing trees (3/3)..."
+    from Bio.Phylo.Applications import PhymlCommandline
+    #TODO: optimization
+    cmdline = PhymlCommandline(input='cached-aligned.phy', datatype='aa', model='LG')
+    out_log, err_log = cmdline()
+
+print "Painting phylogenetic tree..."
+from Bio import Phylo
+egfr_tree = Phylo.read("cached-aligned.phy_phyml_tree.txt", "newick")
+Phylo.draw_ascii(egfr_tree)
