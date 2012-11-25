@@ -73,22 +73,61 @@ multiple_seq_alignment
 
 # Calculating conservation:
 conservations = []
-n = len(multiple_seq_alignment)
-for x in range(0, multiple_seq_alignment.get_alignment_length()):
-    input = multiple_seq_alignment[0,x]
+n_y = len(multiple_seq_alignment)
+n_x = multiple_seq_alignment.get_alignment_length()
+for x in range(0, n_x):
+    symbol = multiple_seq_alignment[0,x]
     same = 0
-    for y in range(1, n):
-        if (multiple_seq_alignment[y,x] == input):
-            same += 1
-    conservations.append(same)
+    if (symbol != '-'):
+        for y in range(1, n_y):
+            if (multiple_seq_alignment[y,x] == symbol):
+                same += 1
+        conservations.append(same)
+    else:
+        conservations.append(0)
     
 # Printing conservations:
 print "Conservation:"
-for x in range(0, multiple_seq_alignment.get_alignment_length()):
+for x in range(0, n_x):
     print "  %c" % multiple_seq_alignment[0, x],
 print ''
-for x in range(0, multiple_seq_alignment.get_alignment_length()):
+for x in range(0, n_x):
     print "{0:3}".format(conservations[x]),
 print ''
     
-    
+# Calculating conservatio sums
+conservation_sums = []
+size = 15
+sum = 0
+for x in range(0, size - 1):
+    sum += conservations[x]
+conservation_sums.append(sum)
+
+index_min = 0
+min = conservation_sums[0]
+index_max = 0
+max = conservation_sums[0]
+
+for x in range(size, n_x):
+    sum += conservations[x]
+    sum -= conservations[x - size]
+    if (sum > max):
+        max = sum
+        index_max = x
+    elif (sum < min):
+        min = sum
+        index_min = x
+    conservation_sums.append(sum)
+
+for x in range(0, n_x - size):
+    print "{0:3}".format(conservation_sums[x]),
+print ''
+
+print "Min: [%d]=%d | Max: [%d]=%d" % (index_min, min, index_max, max)
+print 'Min:',
+for x in range(index_min, index_min + size):
+    print multiple_seq_alignment[0,x],
+print '\nMax:',
+for x in range(index_max, index_max + size):
+    print multiple_seq_alignment[0,x],
+print ''
