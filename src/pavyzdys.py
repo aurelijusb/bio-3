@@ -42,13 +42,27 @@ else:
     cache_handle.close()
 
 
-# Printing sequences
+# Printing unaligned sequences
 for i, sequence in enumerate(sequences):
-    print "______%d_________" % i
-    print sequence.description
-    print sequence.seq
+    print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
-    
-    
-    
+# Aligning
+if (not exists("cached-aligned.fa")):
+    from Bio.Align.Applications import MafftCommandline
+    import os
+    os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
+    mafft_exe = "/usr/bin/mafft"
+    in_file = "cached-unaligned.fa"
+    mafft_cline = MafftCommandline(mafft_exe, input=in_file)
+    stdout, stderr = mafft_cline()
+    handle = open("cached-aligned.fa", "w")
+    handle.write(stdout)
+    handle.close()
+
+# Printing aligned sequences
+print "Aligned..."
+from Bio import AlignIO
+multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
+for i, record in enumerate(multiple_seq_alignment):
+    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
