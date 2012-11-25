@@ -18,7 +18,7 @@ hsa_sequence = SeqIO.read("data1.fa", "fasta");
 sequences = []
 if (exists("cached-unaligned.fa")):
     # Loading from cache
-    sequences = SeqIO.parse("cached-unaligned.fa", "fasta");
+    sequences = list(SeqIO.parse("cached-unaligned.fa", "fasta"));
 else:
     # Downloading sequences from online database
     print "Getting sequences from Swissport database..."
@@ -48,48 +48,51 @@ for i, sequence in enumerate(sequences):
     print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
-# Aligning
-if (not exists("cached-aligned.fa")):
-    print "Aligning..."
-    from Bio.Align.Applications import MafftCommandline
-    import os
-    os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
-    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
-    in_file = "cached-unaligned.fa"
-    mafft_cline = MafftCommandline(mafft_exe, input=in_file)
-    stdout, stderr = mafft_cline()
-    handle = open("cached-aligned.fa", "w")
-    handle.write(stdout)
-    handle.close()
-
-# Printing aligned sequences
-print "Aligned."
-from Bio import AlignIO
-multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
-for i, record in enumerate(multiple_seq_alignment):
-    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
+#    
+## Aligning
+#if (not exists("cached-aligned.fa")):
+#    print "Aligning..."
+#    from Bio.Align.Applications import MafftCommandline
+#    import os
+#    os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
+#    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
+#    in_file = "cached-unaligned.fa"
+#    mafft_cline = MafftCommandline(mafft_exe, input=in_file)
+#    stdout, stderr = mafft_cline()
+#    handle = open("cached-aligned.fa", "w")
+#    handle.write(stdout)
+#    handle.close()
+#
+## Printing aligned sequences
+#print "Aligned."
+#from Bio import AlignIO
+#multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
+#for i, record in enumerate(multiple_seq_alignment):
+#    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
     
-multiple_seq_alignment    
 
 # Calculating conservation:
 conservations = []
-n_y = len(multiple_seq_alignment)
-n_x = multiple_seq_alignment.get_alignment_length()
+n_y = len(sequences)
+n_x = len(hsa_sequence)
 for x in range(0, n_x):
-    symbol = multiple_seq_alignment[0,x]
+    symbol = sequences[0][x]
     same = 0
     if (symbol != '-'):
         for y in range(1, n_y):
-            if (multiple_seq_alignment[y,x] == symbol):
+            if (len(sequences[y].seq) > x and sequences[y][x] == symbol):
                 same += 1
         conservations.append(same)
     else:
         conservations.append(0)
     
 # Printing conservations:
-print "Conservation:"
+print "Conservation (index, symbol, row, block):"
 for x in range(0, n_x):
-    print "  %c" % multiple_seq_alignment[0, x],
+    print "{0:3}".format(x),
+print ''
+for x in range(0, n_x):
+    print "  %c" % hsa_sequence[x],
 print ''
 for x in range(0, n_x):
     print "{0:3}".format(conservations[x]),
@@ -98,36 +101,37 @@ print ''
 # Calculating conservatio sums
 conservation_sums = []
 size = 15
-sum = 0
+current_sum = 0
 for x in range(0, size - 1):
-    sum += conservations[x]
-conservation_sums.append(sum)
+    current_sum += conservations[x]
+conservation_sums.append(current_sum)
 
 index_min = 0
-min = conservation_sums[0]
+min_value = conservation_sums[0]
 index_max = 0
-max = conservation_sums[0]
+max_value = conservation_sums[0]
 
 for x in range(size, n_x):
-    sum += conservations[x]
-    sum -= conservations[x - size]
-    if (sum > max):
-        max = sum
+    current_sum += conservations[x]
+    current_sum -= conservations[x - size]
+    if (current_sum > max_value):
+        max_value = current_sum
         index_max = x
-    elif (sum < min):
-        min = sum
+    elif (current_sum < min_value):
+        min_value = current_sum
         index_min = x
-    conservation_sums.append(sum)
+    conservation_sums.append(current_sum)
 
 for x in range(0, n_x - size):
     print "{0:3}".format(conservation_sums[x]),
 print ''
 
-print "Min: [%d]=%d | Max: [%d]=%d" % (index_min, min, index_max, max)
-print 'Min:',
+print "\nMin: [%d]=%d | Max: [%d]=%d" % (index_min, min_value, index_max, max_value)
+import sys
+print '\nMin: ',
 for x in range(index_min, index_min + size):
-    print multiple_seq_alignment[0,x],
-print '\nMax:',
+    sys.stdout.write(hsa_sequence[x])
+print '\nMax: ',
 for x in range(index_max, index_max + size):
-    print multiple_seq_alignment[0,x],
+    sys.stdout.write(hsa_sequence[x])
 print ''
