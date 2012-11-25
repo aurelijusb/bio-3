@@ -69,24 +69,26 @@ multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
 for i, record in enumerate(multiple_seq_alignment):
     print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
     
-# Phylogenetic trees
-if (not exists("cached-aligned.aln")):
-    print "Prepairing trees (1/3)..."
-    from Bio.Align.Applications import MuscleCommandline
-    cmdline = MuscleCommandline(input="cached-aligned.fa", out="cached-aligned.aln", clw=True)
-    cmdline()
-if (not exists("cached-aligned.phy")):
-    print "Prepairing trees (2/3)..."
-    AlignIO.convert("cached-aligned.aln", "clustal", "cached-aligned.phy", "phylip-relaxed")
+multiple_seq_alignment    
 
-if (not exists("cached-aligned.phy_phyml_tree.txt")):
-    print "Prepairing trees (3/3)..."
-    from Bio.Phylo.Applications import PhymlCommandline
-    #TODO: optimization
-    cmdline = PhymlCommandline(input='cached-aligned.phy', datatype='aa', model='LG')
-    out_log, err_log = cmdline()
-
-print "Painting phylogenetic tree..."
-from Bio import Phylo
-egfr_tree = Phylo.read("cached-aligned.phy_phyml_tree.txt", "newick")
-Phylo.draw_ascii(egfr_tree)
+# Calculating conservation:
+conservations = []
+n = len(multiple_seq_alignment)
+for x in range(0, multiple_seq_alignment.get_alignment_length()):
+    input = multiple_seq_alignment[0,x]
+    same = 0
+    for y in range(1, n):
+        if (multiple_seq_alignment[y,x] == input):
+            same += 1
+    conservations.append(same)
+    
+# Printing conservations:
+print "Conservation:"
+for x in range(0, multiple_seq_alignment.get_alignment_length()):
+    print "  %c" % multiple_seq_alignment[0, x],
+print ''
+for x in range(0, multiple_seq_alignment.get_alignment_length()):
+    print "{0:3}".format(conservations[x]),
+print ''
+    
+    
