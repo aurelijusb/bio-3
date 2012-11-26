@@ -8,6 +8,9 @@ from Bio import SeqIO
 import Bio.Blast.NCBIWWW
 import Bio.Blast.NCBIXML
 
+# Settings
+fragment_size = 15
+
 
 # Preparing input data
 print "Started..."
@@ -26,8 +29,7 @@ else:
         
     # Leaving sequences with good coverage
     for i, alignment in enumerate(Bio.Blast.NCBIXML.read(ncbi).alignments):
-        hsp = alignment.hsps[0]        
-        #FIXME: not same as in http://www.ncbi.nlm.nih.gov/blast/Blast.cgi
+        hsp = alignment.hsps[0]
         coverage = float(hsp.query_end-hsp.query_start+1)/float(len(hsa_sequence))*100
         if (coverage > 80):
             name = alignment.title.split(' ')[0]
@@ -43,34 +45,11 @@ else:
 
 
 # Printing unaligned sequences
-print "Unaligned."
+print "Unaligned sequences:"
 for i, sequence in enumerate(sequences):
     print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
-#    
-## Aligning
-#if (not exists("cached-aligned.fa")):
-#    print "Aligning..."
-#    from Bio.Align.Applications import MafftCommandline
-#    import os
-#    os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
-#    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
-#    in_file = "cached-unaligned.fa"
-#    mafft_cline = MafftCommandline(mafft_exe, input=in_file)
-#    stdout, stderr = mafft_cline()
-#    handle = open("cached-aligned.fa", "w")
-#    handle.write(stdout)
-#    handle.close()
-#
-## Printing aligned sequences
-#print "Aligned."
-#from Bio import AlignIO
-#multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
-#for i, record in enumerate(multiple_seq_alignment):
-#    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
-    
-
 # Calculating conservation:
 conservations = []
 n_y = len(sequences)
@@ -87,25 +66,21 @@ for x in range(0, n_x):
         conservations.append(0)
     
 # Printing conservations:
-print "Conservation (index, symbol, row, block):"
+print "\nSimilarity (index, symbol, column similarity, block similarity):"
 for x in range(0, n_x):
-#    print "{0:3}".format(x),
-    print "%d\t" % x,
+    print "{0:3}".format(x),
 print ''
 for x in range(0, n_x):
-#    print "  %c" % hsa_sequence[x],
-    print "%c\t" % hsa_sequence[x],
+    print "  %c" % hsa_sequence[x],
 print ''
 for x in range(0, n_x):
-#    print "{0:3}".format(conservations[x]),
-    print "%d\t" % conservations[x],
+    print "{0:3}".format(conservations[x]),
 print ''
     
 # Calculating conservatio sums
 conservation_sums = []
-size = 10
 current_sum = 0
-for x in range(0, size):
+for x in range(0, fragment_size):
     current_sum += conservations[x]
 conservation_sums.append(current_sum)
 index_min = 0
@@ -113,29 +88,28 @@ min_value = conservation_sums[0]
 index_max = 0
 max_value = conservation_sums[0]
 
-for x in range(size, n_x):
+for x in range(fragment_size, n_x):
     current_sum += conservations[x]
-    current_sum -= conservations[x - size]
+    current_sum -= conservations[x - fragment_size]
     if (current_sum > max_value):
         max_value = current_sum
-        index_max = x - size + 1
+        index_max = x - fragment_size + 1
     elif (current_sum < min_value):
         min_value = current_sum
-        index_min = x - size + 1
+        index_min = x - fragment_size + 1
     conservation_sums.append(current_sum)
 
-for x in range(0, n_x - size):
-#    print "{0:3}".format(conservation_sums[x]),
-    print "%d\t" % conservation_sums[x],
+for x in range(0, n_x - fragment_size):
+    print "{0:3}".format(conservation_sums[x]),
     
 print ''
 
-print "\nMin: [%d]=%d | Max: [%d]=%d" % (index_min, min_value, index_max, max_value)
+print "\nFormat: [index]=value | Least expected: [%d]=%d | Most expected: [%d]=%d" % (index_min, min_value, index_max, max_value)
 import sys
-print '\nMin: ',
-for x in range(index_min, index_min + size):
+print '\nLeast expected sequence: ',
+for x in range(index_min, index_min + fragment_size):
     sys.stdout.write(hsa_sequence[x])
-print '\nMax: ',
-for x in range(index_max, index_max + size):
+print '\nMost expected sequence: ',
+for x in range(index_max, index_max + fragment_size):
     sys.stdout.write(hsa_sequence[x])
 print ''
