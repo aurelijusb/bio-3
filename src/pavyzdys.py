@@ -89,23 +89,25 @@ for x in range(0, n_x):
 # Printing conservations:
 print "Conservation (index, symbol, row, block):"
 for x in range(0, n_x):
-    print "{0:3}".format(x),
+#    print "{0:3}".format(x),
+    print "%d\t" % x,
 print ''
 for x in range(0, n_x):
-    print "  %c" % hsa_sequence[x],
+#    print "  %c" % hsa_sequence[x],
+    print "%c\t" % hsa_sequence[x],
 print ''
 for x in range(0, n_x):
-    print "{0:3}".format(conservations[x]),
+#    print "{0:3}".format(conservations[x]),
+    print "%d\t" % conservations[x],
 print ''
     
 # Calculating conservatio sums
 conservation_sums = []
-size = 15
+size = 10
 current_sum = 0
-for x in range(0, size - 1):
+for x in range(0, size):
     current_sum += conservations[x]
 conservation_sums.append(current_sum)
-
 index_min = 0
 min_value = conservation_sums[0]
 index_max = 0
@@ -116,14 +118,16 @@ for x in range(size, n_x):
     current_sum -= conservations[x - size]
     if (current_sum > max_value):
         max_value = current_sum
-        index_max = x
+        index_max = x - size + 1
     elif (current_sum < min_value):
         min_value = current_sum
-        index_min = x
+        index_min = x - size + 1
     conservation_sums.append(current_sum)
 
 for x in range(0, n_x - size):
-    print "{0:3}".format(conservation_sums[x]),
+#    print "{0:3}".format(conservation_sums[x]),
+    print "%d\t" % conservation_sums[x],
+    
 print ''
 
 print "\nMin: [%d]=%d | Max: [%d]=%d" % (index_min, min_value, index_max, max_value)
