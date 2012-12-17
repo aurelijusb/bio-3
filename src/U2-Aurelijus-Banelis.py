@@ -66,10 +66,10 @@ from Bio import AlignIO
 cache_handle = open("cached-aligned.fa", "r")
 multipleSeqAlignment = AlignIO.read(cache_handle, "fasta")
 cache_handle.close()
-alignmened = multipleSeqAlignment.get_all_seqs()
+alignmened = list(multipleSeqAlignment)
 
 # Printing aligned sequences
-print "Alaligned sequences:"
+print "Aligning sequences:"
 for i, sequence in enumerate(alignmened):
     print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
 
