@@ -12,6 +12,7 @@ import Bio.Blast.NCBIXML
 fragment_size = 15
 
 
+
 # Preparing input data
 print "Started..."
 hsa_sequence = SeqIO.read("data1.fa", "fasta");
@@ -38,7 +39,7 @@ else:
             sequences.append(record)
     
     # Caching results
-    print "Saving sequences to cache..."
+    print "Saving unaligned sequences to cache..."
     cache_handle = open("cached-unaligned.fa", "w")
     SeqIO.write(sequences, cache_handle, "fasta")
     cache_handle.close()
@@ -50,6 +51,29 @@ for i, sequence in enumerate(sequences):
     print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
+# Aligning
+if (not exists("cached-aligned.fa")):
+    print "Aligning..."
+    try:
+        from Bio.Align.Applications import MuscleCommandline
+        align = MuscleCommandline(input="cached-unaligned.fa", out="cached-aligned.fa")
+        align()
+    except ImportError:
+        print "[Error] Muscle not installed. "    
+
+# Reading cached alignment
+from Bio import AlignIO
+cache_handle = open("cached-aligned.fa", "r")
+multipleSeqAlignment = AlignIO.read(cache_handle, "fasta")
+cache_handle.close()
+alignmened = multipleSeqAlignment.get_all_seqs()
+
+# Printing aligned sequences
+print "Alaligned sequences:"
+for i, sequence in enumerate(alignmened):
+    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
+
+       
 # Calculating conservation:
 conservations = []
 n_y = len(sequences)
