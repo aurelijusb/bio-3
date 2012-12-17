@@ -10,12 +10,11 @@ import Bio.Blast.NCBIXML
 
 # Settings
 fragment_size = 15
-
-
+input_file = "duomenys-1b.fa"
 
 # Preparing input data
 print "Started..."
-hsa_sequence = SeqIO.read("data1.fa", "fasta");
+hsa_sequence = SeqIO.read(input_file, "fasta");
 
 
 # Gathering sequences
@@ -39,7 +38,7 @@ else:
             sequences.append(record)
     
     # Caching results
-    print "Saving unaligned sequences to cache..."
+    print "Saving sequences to cache..."
     cache_handle = open("cached-unaligned.fa", "w")
     SeqIO.write(sequences, cache_handle, "fasta")
     cache_handle.close()
@@ -51,28 +50,6 @@ for i, sequence in enumerate(sequences):
     print "[%d] Unaligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), sequence.id, sequence.seq)
     
     
-# Aligning
-if (not exists("cached-aligned.fa")):
-    print "Aligning..."
-    from Bio.Align.Applications import MafftCommandline
-    import os
-    os.environ['MAFFT_BINARIES'] = "/usr/lib/mafft/lib/mafft"
-    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
-    in_file = "cached-unaligned.fa"
-    mafft_cline = MafftCommandline(mafft_exe, input=in_file)
-    stdout, stderr = mafft_cline()
-    handle = open("cached-aligned.fa", "w")
-    handle.write(stdout)
-    handle.close()
-
-# Printing aligned sequences
-print "Aligned."
-from Bio import AlignIO
-multiple_seq_alignment = AlignIO.read("cached-aligned.fa", "fasta")
-for i, record in enumerate(multiple_seq_alignment):
-    print "[%d] Aligned %s\n\t\t\t\t\t\t\t%s" % ((i+1), record.id, record.seq)
-
-       
 # Calculating conservation:
 conservations = []
 n_y = len(sequences)

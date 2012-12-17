@@ -1,0 +1,284 @@
+X-Account-Key: account1
+X-UIDL: UID3357-1322662302
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on ltvnsplsk9.hostex.lt
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=4.0 tests=FREEMAIL_FROM,HTML_MESSAGE,
+	T_DKIM_INVALID,T_TO_NO_BRKTS_FREEMAIL autolearn=ham version=3.3.2
+Received: (qmail 5592 invoked from network); 16 Oct 2012 15:54:22 +0300
+Received: from kedras.tautvydas.lt (109.235.64.141)
+  by ltvnsplsk9.hostex.lt with SMTP; 16 Oct 2012 15:54:21 +0300
+Received-SPF: neutral (ltvnsplsk9.hostex.lt: 109.235.64.141 is neither permitted nor denied by SPF record at _spf.google.com)
+Received: from mail-bk0-f50.google.com ([209.85.214.50])
+	by kedras.tautvydas.lt with esmtps (TLSv1:RC4-SHA:128)
+	(Exim 4.67)
+	(envelope-from <aurelijus.eta.banelis+caf_=admin=wapsite.lt@gmail.com>)
+	id 1TO6f7-0004ha-CV
+	for admin@wapsite.lt; Tue, 16 Oct 2012 15:54:21 +0300
+Received: by mail-bk0-f50.google.com with SMTP id q16so2564080bkw.9
+        for <admin@wapsite.lt>; Tue, 16 Oct 2012 05:54:20 -0700 (PDT)
+Received: by 10.204.131.75 with SMTP id w11mr4173377bks.111.1350392060572;
+        Tue, 16 Oct 2012 05:54:20 -0700 (PDT)
+X-Forwarded-To: admin@wapsite.lt
+X-Forwarded-For: aurelijus.eta.banelis@gmail.com admin@wapsite.lt
+Delivered-To: aurelijus.eta.banelis@gmail.com
+Received: by 10.204.224.197 with SMTP id ip5csp52047bkb;
+        Tue, 16 Oct 2012 05:54:19 -0700 (PDT)
+Received-SPF: pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBB6VR6WBQKGQE76IDS3I@googlegroups.com designates 10.52.66.235 as permitted sender) client-ip=10.52.66.235
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBB6VR6WBQKGQE76IDS3I@googlegroups.com designates 10.52.66.235 as permitted sender) smtp.mail=mifbioinfo12+bncBD7OLRGN3EPBB6VR6WBQKGQE76IDS3I@googlegroups.com; dkim=pass header.i=mifbioinfo12+bncBD7OLRGN3EPBB6VR6WBQKGQE76IDS3I@googlegroups.com
+Received: from mr.google.com ([10.52.66.235])
+        by 10.52.66.235 with SMTP id i11mr2209274vdt.7.1350392058358 (num_hops = 1);
+        Tue, 16 Oct 2012 05:54:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=20120806;
+        h=x-beenthere:date:from:to:message-id:subject:mime-version
+         :x-original-sender:precedence:mailing-list:list-id:x-google-group-id
+         :list-post:list-help:list-archive:sender:list-subscribe
+         :list-unsubscribe:content-type;
+        bh=XDzaqt/gXd6kUfHLZ3oJcuwBO67ejaAz22xbYIT2TMA=;
+        b=efwtnFGiRDjJOe7n72SWZZx5QCkf9oDPuSz1rkAdHnzxkNRwi2WcGaA2pfhQ5gwUq4
+         VSRG9Zzf7ANt/0M2KDwFWXkEc3b5Ro0TuhBDi+vt6qt5LMWst5K2uDwjX5Uy0XoyNf4v
+         ZLdK+azbb3FQvlZvksJgoW0zkzRUP8km9/YA/ALeH8SYsjWd0EUEG40vaUTTVF000F9g
+         V5mROq2QBcpE0eA7B9zGWAOeyZ948G6MiIL6oI/MYGYzYA4upqtG2wRRMgVXzdzbYp5q
+         NRqa3nMQHw6DqrlLgCZdvHVOnvOOE8O1G695L12DzYvBi/RFDrxs3TmBBJKgaEqBNSqQ
+         p+iA==
+Received: by 10.52.66.235 with SMTP id i11mr2209274vdt.7.1350392058352;
+        Tue, 16 Oct 2012 05:54:18 -0700 (PDT)
+X-BeenThere: mifbioinfo12@googlegroups.com
+Received: by 10.220.108.198 with SMTP id g6ls38274vcp.1.gmail; Tue, 16 Oct
+ 2012 05:54:18 -0700 (PDT)
+Received: by 10.52.72.197 with SMTP id f5mr2199751vdv.17.1350392058156;
+        Tue, 16 Oct 2012 05:54:18 -0700 (PDT)
+Date: Tue, 16 Oct 2012 05:54:17 -0700 (PDT)
+From: Gediminas Alzbutas <galzbutas@gmail.com>
+To: mifbioinfo12@googlegroups.com
+Message-Id: <00b7a9f7-8273-401a-b73e-d38eba4524f1@googlegroups.com>
+Subject: Uzduotis Nr. 2
+MIME-Version: 1.0
+X-Original-Sender: galzbutas@gmail.com
+Precedence: list
+Mailing-list: list mifbioinfo12@googlegroups.com; contact mifbioinfo12+owners@googlegroups.com
+List-ID: <mifbioinfo12.googlegroups.com>
+X-Google-Group-Id: 205955717138
+List-Post: <http://groups.google.com/group/mifbioinfo12/post?hl=en>, <mailto:mifbioinfo12@googlegroups.com>
+List-Help: <http://groups.google.com/support/?hl=en>, <mailto:mifbioinfo12+help@googlegroups.com>
+List-Archive: <http://groups.google.com/group/mifbioinfo12?hl=en>
+Sender: mifbioinfo12@googlegroups.com
+List-Subscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>, <mailto:mifbioinfo12+subscribe@googlegroups.com>
+List-Unsubscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>,
+ <mailto:googlegroups-manage+205955717138+unsubscribe@googlegroups.com>
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_1985_24175493.1350392057845"
+
+------=_Part_1985_24175493.1350392057845
+Content-Type: text/plain; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+=20
+
+*Tikslas*=20
+         Parinkti baltymo sekos fragment=E0, tinkam=E0 gaminti antik=FBnus,=
+ kurie=20
+atpa=FEint=F8 =FEinduoli=F8 (kur vaikus maitina pienu ir turi plaukus - tam=
+e=20
+tarpe ir =FEmon=EBs) pagrindin=E1 kraujo ir plazmos baltym=E0 - serumo=20
+albumin=E0=20
+        Parinktas baltymo fragmentas b=FBt=F8 atskirai susintetintas ir=20
+naudojamas peli=F8 imunizacijai. I=F0skirti antik=FBniai prie=F0 =FEmogaus=
+=20
+serumo albumin=E0 (=DESA) b=FBt=F8 naudojami kriminalistikoje - atpa=FEinti=
+=20
+kraujui ir nustatyti ar kraujas yra =FEmogaus.=20
+*Darbo eiga/U=FEduotys *
+1.I=F0nagrin=EBkite prieinam=E0 atitinkamo geno informacij=E0.=20
+        a)Ie=F0kokite "Gene" duomen=F8 baz=EBje NCBI  portale=20
+http://www.ncbi.nlm.nih.gov/.=20
+Naudokite u=FEklaus=E0 "serum albumin"[Protein name] AND human[Organism].=
+=20
+        b)Koks yra baltymo prieigos kodas? (Prasideda raid=EBmis NP).=20
+Parsisi=F8skite ir pateikite sek=E0 fasta formatu.=20
+        d)Kelioms =FEinduoli=F8 r=FB=F0ims yra surinkta informacija apie se=
+rumo=20
+albumino gen=E0 -   atsakykite naudodami u=FEklaus=E0 "serum=20
+albumin"[Protein name] AND mammals[Organism] " "Gene" duomen=F8 baz=EBje=20
+NCBI. Kelioms pauk=F0=E8i=F8 r=FB=F0ims yra prieinama tokia informacija=20
+(lotyni=F0kai pauk=F0=E8iai - aves, =FEinduoliai - mammals)=20
+2.Gaukite =DEAS ir pana=F0i=F8 sek=F8 =FEinduoliuose sek=F8 palygin=E1. Tol=
+imesnei=20
+analizei naudokite  =DESA baltymo sek=E0.=20
+        a)suraskite visas patikimai =E1 =DESA pana=F0ias =FEinduoli=F8 seka=
+s.=20
+(Naudokite swissprot duomen=F8 baz=E6 bei 'Entrez Query' langel=E1 ).=20
+Atmeskite atitikmenis, kurie apima ma=FEiau nei 80 =C1 sekos ilgio.=20
+        b) Surinkite vis=F8 atitikmen=F8 sekas fasta formatu =E1 vien=E0 fa=
+il=E0=20
+( naudokite "Get selected sequences " opcij=E0 NCBI blast ) ir=20
+i=F0saugokite tolimesniam naudojimui.=20
+        c) Paleiskite JalView program=E0 (http://www.jalview.org/=20
+download.html <http://www.jalview.org/download.html>). Prisimindami=20
+pra=EBjusias pratybas, gaukite su MAFFT programa palygin=E1 bei=20
+filogenetin=E1 med=E1. Pateikite ataskaitoje gauto=20
+med=FEio vaizd=E0. Kokio organizmo serumo albuminas yra pana=F0iausias =E1=
+=20
+=FEmogaus. Sek=F8 sulyginimo apa=E8ioje atkreipkite d=EBmes=E1 =E1 konserva=
+tyvumo=20
+grafik=E0.=20
+3.Parinkite 20 aminor=FBg=F0=E8i=F8 fragment=E0 i=F0 =DESA sekos, kuri:=20
+        a) b=FBt=F8 kiek =E1manomai skirtinga nuo kit=F8 =FEinduoli=F8 sek=
+=F8 - Ji b=FBt=F8=20
+naudojama gaminant antik=FBnus atskirti =FEmogaus kraujui nuo kit=F8=20
+=FEinduoli=F8 kraujo.=20
+        b) b=FBt=F8 kiek =E1manoma pana=F0i =E1 kit=F8 =FEinduoli=F8 serumo=
+ albumino sekas=20
+(i=F0 labiausiai konservatyvios palyginio dalies srities) - Ji b=FBt=F8=20
+naudojama gaminti antik=FBnus leid=FEian=E8i=F8 identifikuoti, kad tiriamas=
+=20
+skystis yra apskritai =FEinduolio   kraujas.=20
+        Sekos parinkim=E0 argumentuokite ir iliustruokite .=20
+4.         Naudodami BioPython (rekomenduoju -http://biopython.org/DIST/doc=
+s/=20
+
+tutorial/Tutorial.html<http://biopython.org/DIST/docs/tutorial/Tutorial.htm=
+l> ar BioJava bibliotekas para=F0ykite=20
+program=E0 ,kuri atlikt=F8 2-r=E0 bei 3-=E8i=E0 u=FEduotis t.y.:=20
+a)surinktu pana=F0ias =FEinduoli=F8 sekas duotai =FEmogaus baltymo sekai.=
+=20
+(nuotolinis Blast paie=F0kos vykdymas, gauto autputo parsinimas gaunant=20
+palygin=E1 fasta formatu)=20
+b)parinkt=F8 15 aminor=FBg=F0=E8i=F8 fragment=E0 i=F0 =FEmogaus baltymo sek=
+os, kuris=20
+b=FBt=F8 i) originaliausias =FEmogui ir labiausiai skirt=F8si nuo  kit=F8 s=
+ek=F8.=20
+ii) b=FBt=F8 labiausiai pana=F0us =E1 kitas =FEinduoli=F8 sekas.=20
+5.Ataskaitoje trumpai apra=F0ykite taikyto algoritmo principus. Kaip=20
+atlikote  fragmento paie=F0k=E0? Kok=E1 =E1vert=E1 vertindami fragmento pan=
+a=F0um=E0=20
+tarp =FEmogaus baltymo ir kitose baltymo sekose naudojote.  Si=F8sdami=20
+ataskait=E0 kartu prid=EBkite ir veikian=E8ios programos kod=E0. Ataskait=
+=F8=20
+laukiu iki Lapkri=E8io pabaigos. Programa bus pl=EBtojama vykdant=20
+likusi=E0 tre=E8i=E0 u=FEduot=E1.
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+mifbioinfo12" group.
+To post to this group, send email to mifbioinfo12@googlegroups.com.
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.
+For more options, visit https://groups.google.com/groups/opt_out.
+
+
+
+------=_Part_1985_24175493.1350392057845
+Content-Type: text/html; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+
+
+
+=09
+=09
+=09
+	<style type=3D"text/css">
+	<!--
+		@page { margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		A:link { so-language: zxx }
+	-->
+	</style>
+
+
+<p style=3D"margin-bottom: 0cm"><b>Tikslas</b> <br>&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parinkti
+baltymo sekos fragment=E0, tinkam=E0 gaminti antik=FBnus, kurie
+<br>atpa=FEint=F8 =FEinduoli=F8 (kur vaikus maitina pienu ir turi plaukus
+- tame <br>tarpe ir =FEmon=EBs) pagrindin=E1 kraujo ir plazmos baltym=E0
+- serumo <br>albumin=E0 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;Parinktas
+baltymo fragmentas b=FBt=F8 atskirai susintetintas ir <br>naudojamas
+peli=F8 imunizacijai. I=F0skirti antik=FBniai prie=F0 =FEmogaus <br>serumo
+albumin=E0 (=DESA) b=FBt=F8 naudojami kriminalistikoje - atpa=FEinti
+<br>kraujui ir nustatyti ar kraujas yra =FEmogaus. <br><b>Darbo
+eiga/U=FEduotys </b><br>1.I=F0nagrin=EBkite prieinam=E0 atitinkamo geno
+informacij=E0. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a)Ie=F0k=
+okite
+"Gene" duomen=F8 baz=EBje NCBI &nbsp;portale
+<a href=3D"http://www.ncbi.nlm.nih.gov/" target=3D"_blank">http://www.ncbi.=
+nlm.nih.gov/</a>.
+<br>Naudokite u=FEklaus=E0 "serum albumin"[Protein name] AND
+human[Organism]. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b)Koks
+yra baltymo prieigos kodas? (Prasideda raid=EBmis NP). <br>Parsisi=F8skite
+ir pateikite sek=E0 fasta formatu. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;d)Kelioms
+=FEinduoli=F8 r=FB=F0ims yra surinkta informacija apie serumo <br>albumino
+gen=E0 - &nbsp; atsakykite naudodami u=FEklaus=E0 "serum
+<br>albumin"[Protein name] AND mammals[Organism] " "Gene"
+duomen=F8 baz=EBje <br>NCBI. Kelioms pauk=F0=E8i=F8 r=FB=F0ims yra prieinam=
+a
+tokia informacija <br>(lotyni=F0kai pauk=F0=E8iai - aves, =FEinduoliai -
+mammals) <br>2.Gaukite =DEAS ir pana=F0i=F8 sek=F8 =FEinduoliuose sek=F8
+palygin=E1. Tolimesnei <br>analizei naudokite &nbsp;=DESA baltymo sek=E0.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a)suraskite visas
+patikimai =E1 =DESA pana=F0ias =FEinduoli=F8 sekas. <br>(Naudokite
+swissprot duomen=F8 baz=E6 bei 'Entrez Query' langel=E1 ). <br>Atmeskite
+atitikmenis, kurie apima ma=FEiau nei 80 =C1 sekos ilgio. <br>&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b)
+Surinkite vis=F8 atitikmen=F8 sekas fasta formatu =E1 vien=E0 fail=E0 <br>(
+naudokite "Get selected sequences " opcij=E0 NCBI blast ) ir
+<br>i=F0saugokite tolimesniam naudojimui. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;c)
+Paleiskite JalView program=E0 (<a href=3D"http://www.jalview.org/download.h=
+tml" target=3D"_blank">http://www.jalview.org/
+<br>download.html</a>). Prisimindami pra=EBjusias pratybas, gaukite su
+MAFFT programa palygin=E1 bei  <br>filogenetin=E1 med=E1. Pateikite
+ataskaitoje gauto <br>med=FEio vaizd=E0. Kokio organizmo serumo
+albuminas yra pana=F0iausias =E1 <br>=FEmogaus. Sek=F8 sulyginimo
+apa=E8ioje atkreipkite d=EBmes=E1 =E1 konservatyvumo <br>grafik=E0.
+<br>3.Parinkite 20 aminor=FBg=F0=E8i=F8 fragment=E0 i=F0 =DESA sekos, kuri:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a) b=FBt=F8 kiek
+=E1manomai skirtinga nuo kit=F8 =FEinduoli=F8 sek=F8 - Ji b=FBt=F8
+<br>naudojama gaminant antik=FBnus atskirti =FEmogaus kraujui nuo kit=F8
+<br>=FEinduoli=F8 kraujo. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;b)
+b=FBt=F8 kiek =E1manoma pana=F0i =E1 kit=F8 =FEinduoli=F8 serumo albumino
+sekas <br>(i=F0 labiausiai konservatyvios palyginio dalies srities) -
+Ji b=FBt=F8 <br>naudojama gaminti antik=FBnus leid=FEian=E8i=F8
+identifikuoti, kad tiriamas <br>skystis yra apskritai =FEinduolio &nbsp;
+kraujas. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sekos
+parinkim=E0 argumentuokite ir iliustruokite . <br>4. &nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;Naudodami
+BioPython (rekomenduoju -<a href=3D"http://biopython.org/DIST/docs/tutorial=
+/Tutorial.html" target=3D"_blank">http://biopython.org/DIST/docs/
+<br>tutorial/Tutorial.html</a> &nbsp;ar BioJava bibliotekas
+para=F0ykite <br>program=E0 ,kuri atlikt=F8 2-r=E0 bei 3-=E8i=E0 u=FEduotis
+t.y.: <br>a)surinktu pana=F0ias =FEinduoli=F8 sekas duotai =FEmogaus
+baltymo sekai. <br>(nuotolinis Blast paie=F0kos vykdymas, gauto
+autputo parsinimas gaunant <br>palygin=E1 fasta formatu) <br>b)parinkt=F8
+15 aminor=FBg=F0=E8i=F8 fragment=E0 i=F0 =FEmogaus baltymo sekos, kuris
+<br>b=FBt=F8 i) originaliausias =FEmogui ir labiausiai skirt=F8si nuo
+&nbsp;kit=F8 sek=F8. <br>ii) b=FBt=F8 labiausiai pana=F0us =E1 kitas
+=FEinduoli=F8 sekas. <br>5.Ataskaitoje trumpai apra=F0ykite taikyto
+algoritmo principus. Kaip <br>atlikote &nbsp;fragmento paie=F0k=E0?
+Kok=E1 =E1vert=E1 vertindami fragmento pana=F0um=E0 <br>tarp =FEmogaus
+baltymo ir kitose baltymo sekose naudojote. &nbsp;Si=F8sdami
+<br>ataskait=E0 kartu prid=EBkite ir veikian=E8ios programos kod=E0.
+Ataskait=F8 <br>laukiu iki Lapkri=E8io pabaigos. Programa bus pl=EBtojama
+vykdant <br>likusi=E0 tre=E8i=E0 u=FEduot=E1.</p>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;mifbioinfo12&quot; group.<br />
+To post to this group, send email to mifbioinfo12@googlegroups.com.<br />
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.<br />
+For more options, visit <a href=3D"https://groups.google.com/groups/opt_out=
+">https://groups.google.com/groups/opt_out</a>.<br />
+&nbsp;<br />
+&nbsp;<br />
+
+------=_Part_1985_24175493.1350392057845--
+
