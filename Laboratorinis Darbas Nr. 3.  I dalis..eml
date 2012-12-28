@@ -1,0 +1,315 @@
+X-Account-Key: account1
+X-UIDL: UID3590-1322662302
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys: $label1                                                                         
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on ltvnsplsk9.hostex.lt
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=FREEMAIL_FROM,HTML_MESSAGE,
+	T_DKIM_INVALID,T_TO_NO_BRKTS_FREEMAIL,UPPERCASE_50_75 autolearn=no
+	version=3.3.2
+Received: (qmail 9691 invoked from network); 13 Nov 2012 16:34:38 +0200
+Received: from kedras.tautvydas.lt (109.235.64.141)
+  by ltvnsplsk9.hostex.lt with SMTP; 13 Nov 2012 16:34:38 +0200
+Received-SPF: neutral (ltvnsplsk9.hostex.lt: 109.235.64.141 is neither permitted nor denied by SPF record at _spf.google.com)
+Received: from mail-bk0-f50.google.com ([209.85.214.50])
+	by kedras.tautvydas.lt with esmtps (TLSv1:RC4-SHA:128)
+	(Exim 4.67)
+	(envelope-from <aurelijus.eta.banelis+caf_=admin=wapsite.lt@gmail.com>)
+	id 1TYHZW-0003Sy-Cl
+	for admin@wapsite.lt; Tue, 13 Nov 2012 16:34:38 +0200
+Received: by mail-bk0-f50.google.com with SMTP id jf3so852272bkc.9
+        for <admin@wapsite.lt>; Tue, 13 Nov 2012 06:34:37 -0800 (PST)
+Received: by 10.204.151.21 with SMTP id a21mr5552969bkw.124.1352817277604;
+        Tue, 13 Nov 2012 06:34:37 -0800 (PST)
+X-Forwarded-To: admin@wapsite.lt
+X-Forwarded-For: aurelijus.eta.banelis@gmail.com admin@wapsite.lt
+Delivered-To: aurelijus.eta.banelis@gmail.com
+Received: by 10.204.227.71 with SMTP id iz7csp467939bkb;
+        Tue, 13 Nov 2012 06:34:36 -0800 (PST)
+Received-SPF: pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBB65URGCQKGQEJNRBVWQ@googlegroups.com designates 10.52.20.51 as permitted sender) client-ip=10.52.20.51
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBB65URGCQKGQEJNRBVWQ@googlegroups.com designates 10.52.20.51 as permitted sender) smtp.mail=mifbioinfo12+bncBD7OLRGN3EPBB65URGCQKGQEJNRBVWQ@googlegroups.com; dkim=pass header.i=mifbioinfo12+bncBD7OLRGN3EPBB65URGCQKGQEJNRBVWQ@googlegroups.com
+Received: from mr.google.com ([10.52.20.51])
+        by 10.52.20.51 with SMTP id k19mr4425396vde.4.1352817276021 (num_hops = 1);
+        Tue, 13 Nov 2012 06:34:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=20120806;
+        h=x-beenthere:date:from:to:message-id:subject:mime-version
+         :x-original-sender:precedence:mailing-list:list-id:x-google-group-id
+         :list-post:list-help:list-archive:sender:list-subscribe
+         :list-unsubscribe:content-type;
+        bh=IvhFh4i/rBjJWXa78ivl3EpllhWFMrrYXzI9tdn25o8=;
+        b=sV0fuY5zyLPYpvXGQAvPsJCTVv1uITgnpydtQRfsimpi7mgWTQjUNrm5plg67lqWTe
+         sRuo4uNMv3EOJkqZExi/WLy44jc9IUI3KprSZqgjm4mIlw9pwBV1liQcSvC4g70Hw8oe
+         RZR913FCIUPpOyDLuXFzyJ/tXI/k/kYIpULDcThRN1j0exqvdxfxApH7yEm8+hwyp6P5
+         m4wUvcIjySjlhaQR2dxbc4Wu47BP0ETQUih3qU6hzSJS91ndgUxE982e/6FBn5QZerMW
+         R/mZdA3nK8AXE3dOier0EN1QvfJEG5+rMs6ywnHa/0Oyjb1SnbTVjgcKMZQ9qPbgiV+j
+         tHhQ==
+Received: by 10.52.20.51 with SMTP id k19mr4425396vde.4.1352817276004;
+        Tue, 13 Nov 2012 06:34:36 -0800 (PST)
+X-BeenThere: mifbioinfo12@googlegroups.com
+Received: by 10.220.226.7 with SMTP id iu7ls9004347vcb.6.gmail; Tue, 13 Nov
+ 2012 06:34:35 -0800 (PST)
+Received: by 10.52.93.132 with SMTP id cu4mr4387712vdb.14.1352817275698;
+        Tue, 13 Nov 2012 06:34:35 -0800 (PST)
+Date: Tue, 13 Nov 2012 06:34:35 -0800 (PST)
+From: Gediminas Alzbutas <galzbutas@gmail.com>
+To: mifbioinfo12@googlegroups.com
+Message-Id: <3127a057-02dd-4731-ba47-1133e2125813@googlegroups.com>
+Subject: Laboratorinis Darbas Nr. 3.  I dalis.
+MIME-Version: 1.0
+X-Original-Sender: galzbutas@gmail.com
+Precedence: list
+Mailing-list: list mifbioinfo12@googlegroups.com; contact mifbioinfo12+owners@googlegroups.com
+List-ID: <mifbioinfo12.googlegroups.com>
+X-Google-Group-Id: 205955717138
+List-Post: <http://groups.google.com/group/mifbioinfo12/post?hl=en>, <mailto:mifbioinfo12@googlegroups.com>
+List-Help: <http://groups.google.com/support/?hl=en>, <mailto:mifbioinfo12+help@googlegroups.com>
+List-Archive: <http://groups.google.com/group/mifbioinfo12?hl=en>
+Sender: mifbioinfo12@googlegroups.com
+List-Subscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>, <mailto:mifbioinfo12+subscribe@googlegroups.com>
+List-Unsubscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>,
+ <mailto:googlegroups-manage+205955717138+unsubscribe@googlegroups.com>
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_68_18274409.1352817275369"
+
+------=_Part_68_18274409.1352817275369
+Content-Type: text/plain; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+=20
+
+*Laboratorinis Darbas Nr. 3. I dalis.*
+
+
+=20
+ U=FEduotis=20
+
+Sukurti pobes parinkimo diagnostinei sistemai program=E0, skirt=E0 sukurti=
+=20
+probe tinkama tik tam tikr=F8 virus=F8 DNR detekcijai, kuomet padauginimui=
+=20
+naudojma PGR (Polimerazin=E6 grandinin=E6 reakcij=E0)
+
+Sukurt=E0 program=E0 pritaikyti projektuojant diagnostin=E6 sistem=E0 =FEmo=
+gaus=20
+papilomos viruso (HPV) 16,18,31,33,35,51,52 tip=F8 (sukelia gimdos kaklelio=
+=20
+v=EB=FE=E1) infekcijai nustatyti. Diagnostin=EB sistema turi b=FBti specifi=
+=F0ka ir=20
+turi neb=FBti signalo nepavojing=F8 HPV infekcij=F8 atvejais (tipai 6, 11, =
+40,=20
+42, 43, 44, 57, 81).
+
+Dokumentuota programa tur=EBt=F8 parinkin=EBti DNR probe L1 geno regione. *=
+Atitinkama=20
+=F0io geno seka i=F0 HPV 16 tipo genomo pateikta =F0io dokumento pabaigoje.=
+ =D0i=E0=20
+sek=E0 galite naudoti per blast u=FEklausas rinkdami sekas analizei.*
+
+*Kuriant algoritm=E0 tikslas b=FBt=F8 sukurti j=E1 tok=E1, kad b=FBt=F8 par=
+enkamas kuo=20
+ma=FEesnis probiu kiekis tinkantis vis=F8 =FEinom=F8 didel=EBs rizikos HPV =
+tip=F8=20
+variant=F8 diagnostikai. *=20
+
+
+=20
+=20
+
+ I dalies uzduotis:=20
+
+
+
+=20
+   Modifikuokite jau sukurta programa taip, kad:
+   1.=20
+  =20
+   Parsiustu visu tipu pavojingu ir nepavojingu zmogaus papilomos viruso=20
+   prieinamas sekas fasta formatu =E1 atskirus failus (vieno tipo sekos vie=
+nas=20
+   failas). Paieskai naudokite dokumento pabaigoje pateikta L1 geno fragmen=
+ta.
+   2.=20
+  =20
+   Naudojant cd-hit programa ( http://weizhong-lab.ucsd.edu/cd-hit/)=20
+   panaikintu identiskas sekas.
+   3.=20
+  =20
+   Sulietus atskirus failus =E1 viena fasta faila (virsuje pavojingi tipai,=
+=20
+   zemiau nepavojingi) ir gautumet bendra sulyginima su mafft (
+   http://mafft.cbrc.jp/alignment/software/)
+  =20
+Likusia uzduoties dali dar publikuosiu:)
+
+
+ *>gi|333031:5559-7154 Human papillomavirus type 16 (HPV16), complete genom=
+e*
+ATGCAGGTGACTTTTATTTACATCCTAGTTATTACATGTTACGAAAACGACGTAAACGTTTACCATATTT
+TTTTTCAGATGTCTCTTTGGCTGCCTAGTGAGGCCACTGTCTACTTGCCTCCTGTCCCAGTATCTAAGGT
+TGTAAGCACGGATGAATATGTTGCACGCACAAACATATATTATCATGCAGGAACATCCAGACTACTTGCA
+GTTGGACATCCCTATTTTCCTATTAAAAAACCTAACAATAACAAAATATTAGTTCCTAAAGTATCAGGAT
+TACAATACAGGGTATTTAGAATACATTTACCTGACCCCAATAAGTTTGGTTTTCCTGACACCTCATTTTA
+TAATCCAGATACACAGCGGCTGGTTTGGGCCTGTGTAGGTGTTGAGGTAGGTCGTGGTCAGCCATTAGGT
+GTGGGCATTAGTGGCCATCCTTTATTAAATAAATTGGATGACACAGAAAATGCTAGTGCTTATGCAGCAA
+ATGCAGGTGTGGATAATAGAGAATGTATATCTATGGATTACAAACAAACACAATTGTGTTTAATTGGTTG
+CAAACCACCTATAGGGGAACACTGGGGCAAAGGATCCCCATGTACCAATGTTGCAGTAAATCCAGGTGAT
+TGTCCACCATTAGAGTTAATAAACACAGTTATTCAGGATGGTGATATGGTTCATACTGGCTTTGGTGCTA
+TGGACTTTACTACATTACAGGCTAACAAAAGTGAAGTTCCACTGGATATTTGTACATCTATTTGCAAATA
+TCCAGATTATATTAAAATGGTGTCAGAACCATATGGCGACAGCTTATTTTTTTATTTACGAAGGGAACAA
+ATGTTTGTTAGACATTTATTTAATAGGGCTGGTACTGTTGGTGAAAATGTACCAGACGATTTATACATTA
+AAGGCTCTGGGTCTACTGCAAATTTAGCCAGTTCAAATTATTTTCCTACACCTAGTGGTTCTATGGTTAC
+CTCTGATGCCCAAATATTCAATAAACCTTATTGGTTACAACGAGCACAGGGCCACAATAATGGCATTTGT
+TGGGGTAACCAACTATTTGTTACTGTTGTTGATACTACACGCAGTACAAATATGTCATTATGTGCTGCCA
+TATCTACTTCAGAAACTACATATAAAAATACTAACTTTAAGGAGTACCTACGACATGGGGAGGAATATGA
+TTTACAGTTTATTTTTCAACTGTGCAAAATAACCTTAACTGCAGACGTTATGACATACATACATTCTATG
+AATTCCACTATTTTGGAGGACTGGAATTTTGGTCTACAACCTCCCCCAGGAGGCACACTAGAAGATACTT
+ATAGGTTTGTAACCCAGGCAATTGCTTGTCAAAAACATACACCTCCAGCACCTAAAGAAGATGATCCCCT
+TAAAAAATACACTTTTTGGGAAGTAAATTTAAAGGAAAAGTTTTCTGCAGACCTAGATCAGTTTCCTTTA
+GGACGCAAATTTTTACTACAAGCAGGATTGAAGGCCAAACCAAAATTTACATTAGGAAAACGAAAAGCTA
+CACCCACCACCTCATCTACCTCTACAACTGCTAAACGCAAAAAACGTAAGCTGTAA
+
+
+=20
+=20
+=20
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+mifbioinfo12" group.
+To post to this group, send email to mifbioinfo12@googlegroups.com.
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.
+For more options, visit https://groups.google.com/groups/opt_out.
+
+
+
+------=_Part_68_18274409.1352817275369
+Content-Type: text/html; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+
+
+
+=09
+=09
+=09
+	<style type=3D"text/css">
+	<!--
+		@page { margin: 2cm }
+		PRE.cjk { font-family: "Droid Sans Fallback", monospace }
+		PRE.ctl { font-family: "Lohit Hindi", monospace }
+		H3 { margin-bottom: 0.21cm }
+		H3.cjk { font-family: "Droid Sans Fallback" }
+		H3.ctl { font-family: "Lohit Hindi" }
+		P { margin-bottom: 0.21cm }
+		A:link { so-language: zxx }
+	-->
+	</style>
+
+
+<p style=3D"margin-bottom: 0cm" align=3D"CENTER"><b>Laboratorinis Darbas
+Nr. 3.  I dalis.</b></p>
+<p style=3D"margin-bottom: 0cm" align=3D"CENTER"><br>
+</p>
+<p style=3D"margin-bottom: 0cm" align=3D"CENTER"><br>
+</p>
+<h3 class=3D"western">U=FEduotis</h3>
+<p style=3D"margin-bottom: 0cm; font-weight: normal" align=3D"LEFT">Sukurti
+ pobes parinkimo diagnostinei sistemai program=E0, skirt=E0 sukurti
+probe tinkama tik tam tikr=F8 virus=F8 DNR detekcijai, kuomet
+padauginimui naudojma PGR (Polimerazin=E6 grandinin=E6 reakcij=E0)</p>
+<p style=3D"margin-bottom: 0cm; font-weight: normal" align=3D"LEFT">Sukurt=
+=E0
+program=E0 pritaikyti projektuojant diagnostin=E6 sistem=E0 =FEmogaus
+papilomos viruso (HPV) 16,18,31,33,35,51,52 tip=F8 (sukelia gimdos
+kaklelio v=EB=FE=E1) infekcijai nustatyti. Diagnostin=EB sistema turi
+b=FBti specifi=F0ka ir turi neb=FBti signalo nepavojing=F8 HPV infekcij=F8
+atvejais (tipai 6, 11, 40, 42, 43, 44, 57, 81).</p>
+<p style=3D"margin-bottom: 0cm; font-weight: normal" align=3D"LEFT">Dokumen=
+tuota
+programa tur=EBt=F8 parinkin=EBti DNR probe L1 geno regione. <b>Atitinkama
+=F0io geno seka i=F0 HPV 16 tipo genomo pateikta =F0io dokumento
+pabaigoje. =D0i=E0 sek=E0 galite naudoti per blast u=FEklausas rinkdami
+sekas analizei.</b></p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><b>Kuriant algoritm=E0
+tikslas b=FBt=F8 sukurti j=E1 tok=E1, kad b=FBt=F8 parenkamas kuo ma=FEesni=
+s
+probiu kiekis tinkantis vis=F8 =FEinom=F8 didel=EBs rizikos HPV tip=F8
+variant=F8 diagnostikai. </b>
+</p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><br>
+</p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><br>
+</p>
+<p><br><br>
+</p>
+<h3 class=3D"western">I dalies uzduotis:</h3>
+<p><br><br>
+</p>
+<ol><p>Modifikuokite jau sukurta programa taip, kad:</p><li><p>Parsiustu vi=
+su tipu pavojingu ir nepavojingu zmogaus
+	papilomos viruso prieinamas sekas fasta formatu =E1 atskirus failus
+	(vieno tipo sekos vienas failas). Paieskai naudokite dokumento
+	pabaigoje pateikta L1 geno fragmenta.</p>
+	</li><li><p>Naudojant cd-hit programa
+	( http://weizhong-lab.ucsd.edu/cd-hit/) panaikintu identiskas sekas.</p>
+	</li><li><p>Sulietus atskirus failus =E1 viena fasta faila (virsuje
+	pavojingi tipai, zemiau nepavojingi) ir gautumet bendra sulyginima
+	su mafft (<a href=3D"http://mafft.cbrc.jp/alignment/software/">http://maff=
+t.cbrc.jp/alignment/software/</a>)</p>
+</li></ol>
+<p>Likusia uzduoties dali dar publikuosiu:)</p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><br>
+</p>
+<pre class=3D"western" style=3D"text-align: left"><b>&gt;gi|333031:5559-715=
+4 Human papillomavirus type 16 (HPV16), complete genome</b>
+ATGCAGGTGACTTTTATTTACATCCTAGTTATTACATGTTACGAAAACGACGTAAACGTTTACCATATTT
+TTTTTCAGATGTCTCTTTGGCTGCCTAGTGAGGCCACTGTCTACTTGCCTCCTGTCCCAGTATCTAAGGT
+TGTAAGCACGGATGAATATGTTGCACGCACAAACATATATTATCATGCAGGAACATCCAGACTACTTGCA
+GTTGGACATCCCTATTTTCCTATTAAAAAACCTAACAATAACAAAATATTAGTTCCTAAAGTATCAGGAT
+TACAATACAGGGTATTTAGAATACATTTACCTGACCCCAATAAGTTTGGTTTTCCTGACACCTCATTTTA
+TAATCCAGATACACAGCGGCTGGTTTGGGCCTGTGTAGGTGTTGAGGTAGGTCGTGGTCAGCCATTAGGT
+GTGGGCATTAGTGGCCATCCTTTATTAAATAAATTGGATGACACAGAAAATGCTAGTGCTTATGCAGCAA
+ATGCAGGTGTGGATAATAGAGAATGTATATCTATGGATTACAAACAAACACAATTGTGTTTAATTGGTTG
+CAAACCACCTATAGGGGAACACTGGGGCAAAGGATCCCCATGTACCAATGTTGCAGTAAATCCAGGTGAT
+TGTCCACCATTAGAGTTAATAAACACAGTTATTCAGGATGGTGATATGGTTCATACTGGCTTTGGTGCTA
+TGGACTTTACTACATTACAGGCTAACAAAAGTGAAGTTCCACTGGATATTTGTACATCTATTTGCAAATA
+TCCAGATTATATTAAAATGGTGTCAGAACCATATGGCGACAGCTTATTTTTTTATTTACGAAGGGAACAA
+ATGTTTGTTAGACATTTATTTAATAGGGCTGGTACTGTTGGTGAAAATGTACCAGACGATTTATACATTA
+AAGGCTCTGGGTCTACTGCAAATTTAGCCAGTTCAAATTATTTTCCTACACCTAGTGGTTCTATGGTTAC
+CTCTGATGCCCAAATATTCAATAAACCTTATTGGTTACAACGAGCACAGGGCCACAATAATGGCATTTGT
+TGGGGTAACCAACTATTTGTTACTGTTGTTGATACTACACGCAGTACAAATATGTCATTATGTGCTGCCA
+TATCTACTTCAGAAACTACATATAAAAATACTAACTTTAAGGAGTACCTACGACATGGGGAGGAATATGA
+TTTACAGTTTATTTTTCAACTGTGCAAAATAACCTTAACTGCAGACGTTATGACATACATACATTCTATG
+AATTCCACTATTTTGGAGGACTGGAATTTTGGTCTACAACCTCCCCCAGGAGGCACACTAGAAGATACTT
+ATAGGTTTGTAACCCAGGCAATTGCTTGTCAAAAACATACACCTCCAGCACCTAAAGAAGATGATCCCCT
+TAAAAAATACACTTTTTGGGAAGTAAATTTAAAGGAAAAGTTTTCTGCAGACCTAGATCAGTTTCCTTTA
+GGACGCAAATTTTTACTACAAGCAGGATTGAAGGCCAAACCAAAATTTACATTAGGAAAACGAAAAGCTA
+CACCCACCACCTCATCTACCTCTACAACTGCTAAACGCAAAAAACGTAAGCTGTAA</pre><p style=3D"m=
+argin-bottom: 0cm" align=3D"LEFT">
+<br>
+</p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><br>
+</p>
+<p style=3D"margin-bottom: 0cm" align=3D"LEFT"><br>
+</p>
+<p style=3D"margin-bottom: 0cm"><br>
+</p>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;mifbioinfo12&quot; group.<br />
+To post to this group, send email to mifbioinfo12@googlegroups.com.<br />
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.<br />
+For more options, visit <a href=3D"https://groups.google.com/groups/opt_out=
+">https://groups.google.com/groups/opt_out</a>.<br />
+&nbsp;<br />
+&nbsp;<br />
+
+------=_Part_68_18274409.1352817275369--
+
