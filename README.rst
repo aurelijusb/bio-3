@@ -1,17 +1,20 @@
-BIO: Simple fasta and alignment
-===============================
+Bioinfomratics
+==============
 
 Compiling/running
 -----------------
 
-    python U2-Aurelijus-Banelis.py
+    python HpvAnalyser.py
     
+Libraries and external tools
+----------------------------
+
+ * BioPython http://biopython.org/wiki/Main_Page
+ * CD-HIT http://weizhong-lab.ucsd.edu/cd-hit/
+ * MAfft http://mafft.cbrc.jp/alignment/software/
+
 TODO
 ----
-
-Laboratorinis Darbas Nr. 3. I dalis.
-
-
 
 Užduotis
 
@@ -34,26 +37,30 @@ dokumento pabaigoje.
 kuo mažesnis probiu kiekis tinkantis visų žinomų didelės rizikos
 HPV tipų variantų diagnostikai.
 
-I dalies uzduotis:
-Modifikuokite jau sukurta programa taip, kad:
-* Parsiustu visu tipu pavojingu ir nepavojingu zmogaus papilomos viruso prieinamas sekas fasta formatu į atskirus failus (vieno tipo sekos vienas failas). Paieskai naudokite dokumento pabaigoje pateikta L1 geno fragmenta.
-* Naudojant cd-hit programa ( http://weizhong-lab.ucsd.edu/cd-hit/) panaikintu identiskas sekas.
-* Sulietus atskirus failus į viena fasta faila (virsuje pavojingi tipai, zemiau nepavojingi) ir gautumet bendra sulyginima su mafft (http://mafft.cbrc.jp/alignment/software/)
+II dalies uzduotis:
+Užduotis
+
+Parinkti probių sistemą, kurioje būtų kuo mažiau probių, taip kad:
+1. Visų probių sekų lydymosi temperatūra turėtų nesiskirti daugiau nei 5 laipsniais (rekomenduojamas ilgis 15-30 bp)
+2. Kiekvienai didelio pavojingumo papilomos viruso sekai turėtų būti bent po vieną probę jų rinkinyje, kurios lydymosi temperatūra ant viruso sekos būtų ne mažesnė nei 60 laipsnių (virusas bus detektuojamas).
+3. Visų probių lydymosi temperatūra ant   mažo pavojingumo viruso sekos neturėtų būti daugiau nei 55 laipsniai.
+4. Regionas, iš kurio parenkamos probės neturėtų būti ilgesnis nei 60bp. Rekomenduojamas probių ilgis 15-30 bp (virusas bus nedetektuojamas).
+
+Lydymosi temperatūrai apskaičiuoti rekomenduoju programą http://sourceforge.net/projects/melting/.
+Pradėti rekomenduoju nuo funkcijos, kurios parametrai būtų dvi sekos: prilydomą seka ir seką ant kurios bus lydoma ir ji paskaičiuotų lydymosi temperatūrą paleisdama melting programą.
+O poto jūsų fantazijos reikalas.
+
+Galbūt daugeliui lydymosi temperatūra per daug komplikuoja suvokimą.
+Pateiku užduotį be jos.
+
+Parinkti probių sistemą, kurioje būtų kuo mažiau probių, taip kad:
+1. Visų probių ilgis būtų 30±5 bazių porų (bp).
+2. Kiekvienai didelio pavojingumo papilomos viruso sekai turėtų būti bent po vieną probę rinkinyje, taip kad tarp jos ir viruso sekos būtų NEdaugiau nei 2 nesutapimai.
+3. Visos probės turėtų bent po 3 nesutapimus su VISOMIS nepavojingų virusų sekomis.
+4. Regionas, iš kurio parenkamos probės neturėtų būti ilgesnis nei 60 bp. 
 
 
-    
-Questions
----------
 
- * Atsiųst patobulintą
- * slen?
- * gaps?
-    * pagal pirmąjį
-    * 1-1
- * Palynimo algoritmas
-    * skirtumų keikis
-    * mutacijas, jų dažnumą
- 
 References
 ----------
 

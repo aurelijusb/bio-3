@@ -1,4 +1,4 @@
-# Bioinformatics, task 3.1
+# Bioinformatics, task 3.2
 #
 # @author: Aurelijus Banelis 
 from Bio.Align.Applications import MafftCommandline
