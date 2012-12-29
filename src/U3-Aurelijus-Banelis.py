@@ -1,13 +1,7 @@
 # Bioinformatics, task 3
 #
 # @author: Aurelijus Banelis 
-from genericpath import exists
-from Bio.SeqRecord import SeqRecord
-from Bio.Seq import Seq
-from Bio import SeqIO
-import Bio.Blast.NCBIWWW
-import Bio.Blast.NCBIXML
-
+from Bio.Align.Applications import MafftCommandline
 from Bio import Entrez
 import logging
 import itertools
@@ -26,9 +20,12 @@ class HpvAnalyser:
     safe = [6, 11, 40, 42, 43, 44, 57, 81]
     email = 'aurelijus@banelis.lt'
     cdhit = '/usr/bin/cdhit-est'
+    cdhitFastaExtention = '-cdhit'
     batch_size = 20
     retMax = 700
     log = logging.getLogger("hpv")
+    mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
+    mafft_lib = "/usr/lib/mafft/lib/mafft"
     
     # Properties
     query = '';
@@ -36,6 +33,8 @@ class HpvAnalyser:
     count = 0
     webenv = None
     queryKey = None
+    commonFile = ''
+    commonAlignedFile = ''
     
     def generateEntrezQuery(self):
         """ Saves and returns query to get information about all HPV types. """
@@ -134,7 +133,7 @@ class HpvAnalyser:
         """ Use CD-HIT to remove duplicates """
         for typeNr in itertools.chain(self.harmfull, self.safe):
             input = self._fastaName(typeNr)
-            output = self._fastaName(typeNr, '-cdhit')
+            output = self._fastaName(typeNr, self.cdhitFastaExtention)
             self.log.info("CD-HIT for " + input)
             return self._run(self.cdhit + ' -i ' + input + ' -o ' + output)
         
@@ -161,6 +160,31 @@ class HpvAnalyser:
         for file in glob.glob('HPV*.clstr'):
             os.remove(file)
 
+    def saveToCommonFile(self, fileName="HPV-all.fa"):
+        """ Save all filtered sequences to common file """
+        output = open(fileName, 'w')
+        for type in self.harmfull:
+            input = open(self._fastaName(type, self.cdhitFastaExtention))
+            output.write(input.read())
+            input.close()
+        for type in self.safe:
+            input = open(self._fastaName(type, self.cdhitFastaExtention))
+            output.write(input.read())
+            input.close()
+        output.close()
+        self.commonFile = fileName
+
+    def align(self, resultFile="HPV-aligned.fa"):
+        """ Use Mafft to align all sequences saved to common file """
+        os.environ['MAFFT_BINARIES'] = self.mafft_lib
+        mafft_cline = MafftCommandline(self.mafft_exe, input=self.commonFile)
+        stdout, stderr = mafft_cline()
+        handle = open(resultFile, "w")
+        handle.write(stdout)
+        handle.close()
+        self.commonAlignedFile = resultFile
+    
+
 # Running
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 log = logging.getLogger("hpv")
@@ -181,5 +205,11 @@ hpvAnalyser._removeCdHitTempFiles()
 
 log.info("Removing duplicates")
 hpvAnalyser.removeDuplicates()
+
+log.info("Saving all to common file")
+hpvAnalyser.saveToCommonFile()
+
+log.info("Aligning")
+hpvAnalyser.align()
 
 log.info("Finished: " + str(round(time.time() - startTime)) + " seconds") 
