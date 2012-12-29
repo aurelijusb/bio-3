@@ -1,4 +1,4 @@
-# Bioinformatics, task 3
+# Bioinformatics, task 3.1
 #
 # @author: Aurelijus Banelis 
 from Bio.Align.Applications import MafftCommandline
@@ -19,9 +19,9 @@ class HpvAnalyser:
     harmfull = [16, 18, 31, 33, 35, 51, 52]
     safe = [6, 11, 40, 42, 43, 44, 57, 81]
     email = 'aurelijus@banelis.lt'
-    cdhit = '/usr/bin/cdhit-est'
+    cdhit = '/usr/bin/cdhit'
     cdhitFastaExtention = '-cdhit'
-    batch_size = 20
+    batchSize = 20
     retMax = 700
     log = logging.getLogger("hpv")
     mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
@@ -64,13 +64,13 @@ class HpvAnalyser:
         """ Get Full sequences from database and convert them to Fasta """
         self._emptyCachedFiles()
         count = len(self.ids)
-        for start in range(0, count, self.batch_size):
-            end = min(count, start+self.batch_size)
+        for start in range(0, count, self.batchSize):
+            end = min(count, start+self.batchSize)
             self.log.info("Downloading record %i-%i/%d" %
                          (start+1, end, self.count))
             fetch_handle = Entrez.efetch(db="nucleotide", rettype="gbwithparts",
                                          retmode="text", retstart=start,
-                                         retmax=self.batch_size,
+                                         retmax=self.batchSize,
                                          webenv=self.webenv,
                                          query_key=self.queryKey)
             combinedGenBank = fetch_handle.read()
@@ -80,7 +80,6 @@ class HpvAnalyser:
                     self.log.info("Converting to Fasta %i/%i" %
                                    (start+i, self.count))
                     self._saveToFasta(genBankText, self.ids[start + i])
-        self._removeCdHitTempFiles()
         
     def _emptyCachedFiles(self):
         """ Creates empty Fasta files for each HPV type. """ 
@@ -136,6 +135,7 @@ class HpvAnalyser:
             output = self._fastaName(typeNr, self.cdhitFastaExtention)
             self.log.info("CD-HIT for " + input)
             return self._run(self.cdhit + ' -i ' + input + ' -o ' + output)
+        self._removeCdHitTempFiles()
         
     def _run(self, program, arguments=''): 
         """ Run program and return output of it """
