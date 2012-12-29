@@ -67,3 +67,4 @@ References
  * http://biopython.org/DIST/docs/tutorial/Tutorial.html
  * http://bips.u-strasbg.fr/fr/Tutorials/Comparison/Blast/blastall.html
  * http://ghr.nlm.nih.gov/glossary=probe
+ * http://www.ncbi.nlm.nih.gov/nuccore/
