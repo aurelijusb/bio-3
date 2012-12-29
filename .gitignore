@@ -3,4 +3,7 @@
 *.pyo
 cached*
 *.odt
+.gitignore
 debug*
+src/HPV*.fa
+docs/

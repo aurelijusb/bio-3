@@ -13,7 +13,11 @@ import logging
 import itertools
 import re
 import textwrap
-
+import subprocess
+import os
+import exceptions
+import time
+import glob
 
 class HpvAnalyser:
     # Configuration
@@ -21,11 +25,15 @@ class HpvAnalyser:
     harmfull = [16, 18, 31, 33, 35, 51, 52]
     safe = [6, 11, 40, 42, 43, 44, 57, 81]
     email = 'aurelijus@banelis.lt'
-    batch_size = 3
+    cdhit = '/usr/bin/cdhit-est'
+    batch_size = 20
+    retMax = 700
+    log = logging.getLogger("hpv")
     
     # Properties
     query = '';
     ids = []
+    count = 0
     webenv = None
     queryKey = None
     
@@ -44,21 +52,23 @@ class HpvAnalyser:
         if (query == None):
             query = self.query
         Entrez.email = self.email
-        handle = Entrez.esearch(db="nucleotide", term=query, usehistory="y")
+        handle = Entrez.esearch(db="nucleotide", term=query, retmax=self.retMax,
+                                usehistory="y")
         record = Entrez.read(handle)
-        for key, value in record.items():
-            print key, value
+        self.count = int(record["Count"])
         self.ids = record["IdList"]
         self.webenv = record["WebEnv"]
         self.queryKey = record["QueryKey"] 
         handle.close()
         
-    def retreveData(self):
+    def retrieveData(self):
         """ Get Full sequences from database and convert them to Fasta """
         self._emptyCachedFiles()
-        for start in range(0,len(self.ids),batch_size):
-            end = min(count, start+batch_size)
-            logger.info("Going to download record %i to %i" % (start+1, end))
+        count = len(self.ids)
+        for start in range(0, count, self.batch_size):
+            end = min(count, start+self.batch_size)
+            self.log.info("Downloading record %i-%i/%d" %
+                         (start+1, end, self.count))
             fetch_handle = Entrez.efetch(db="nucleotide", rettype="gbwithparts",
                                          retmode="text", retstart=start,
                                          retmax=self.batch_size,
@@ -67,43 +77,48 @@ class HpvAnalyser:
             combinedGenBank = fetch_handle.read()
             fetch_handle.close()
             for i, genBankText in enumerate(combinedGenBank.split("\n//\n")):
-                logger.info("Converting to Fasta %i/%i" % (start+i, end))
-                self._saveToFasta(genBankText)
+                if (len(genBankText) > 100):
+                    self.log.info("Converting to Fasta %i/%i" %
+                                   (start+i, self.count))
+                    self._saveToFasta(genBankText, self.ids[start + i])
+        self._removeCdHitTempFiles()
         
     def _emptyCachedFiles(self):
         """ Creates empty Fasta files for each HPV type. """ 
         for typeNr in itertools.chain(self.harmfull, self.safe):
             open(self._fastaName(typeNr), 'w').close()
         
-    def _fastaName(self, type):
+    def _fastaName(self, typeNr, suffix = ''):
         """ Generates fasta file name by type number """
-        return 'HPV' + str(type) + '.fa'
+        return 'HPV' + str(typeNr) + suffix + '.fa'
 
-    def _saveToFasta(self, genBankText):
+    def _saveToFasta(self, genBankText, id):
         """Converts GenBank format to Fasta. 
         
         Takes only gene part and save to file as per HPV type.
         """
        
         # Parsing GenBank to Fasta sequence
-        parts = genBankText.split('/gene="' + self.gene)
-        if (len(parts) > 1):
+        try:
+            parts = genBankText.split('/gene="' + self.gene)
             boundaries = re.search('(\d+)[\.|>]+(\d+)', parts[1])
             start = int(boundaries.group(1))
             end = int(boundaries.group(2))
-            origin = parts[2].split("\nORIGIN      \n")[1]
+            origin = parts[-1].split("\nORIGIN      ")[1]
             fullFasta = ''
             for row in origin.split('\n'):
                 fullFasta += row[11:].replace(' ', '').upper()
             usefullFasta = fullFasta[start:end]
             usefullFasta = "\n".join(textwrap.wrap(usefullFasta, 70))
-            
+
             # Parsing GenBank to Fasta header
             title = re.search('DEFINITION  (.+)\n', parts[0]).group(1)
             id = re.search('  GI:(.+)\n', parts[0]).group(1)
             type = re.search('Human papillomavirus type (\d+)', parts[0])
             type = int(type.group(1))
-            header = '>gi|' + id + ':' + str(start) + '-' + str(end) + ' ' + title
+            header = '>gi|' + id + ':' + str(start) + '-' + str(end) + ' ' + \
+                     title
+            self.log.info('Converted: ' + header)
                      
             # Saving to file
             data = header + "\n" + usefullFasta + "\n"
@@ -111,18 +126,60 @@ class HpvAnalyser:
             file.write(data)
             file.close()
             return data
-
+        except:
+            self.log.warn("Not converted to Fasta: " + id)
+            print genBankText
+        
+    def removeDuplicates(self):
+        """ Use CD-HIT to remove duplicates """
+        for typeNr in itertools.chain(self.harmfull, self.safe):
+            input = self._fastaName(typeNr)
+            output = self._fastaName(typeNr, '-cdhit')
+            self.log.info("CD-HIT for " + input)
+            return self._run(self.cdhit + ' -i ' + input + ' -o ' + output)
+        
+    def _run(self, program, arguments=''): 
+        """ Run program and return output of it """
+        proc = subprocess.Popen([program, arguments], stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, shell=True)
+        out, err = proc.communicate()
+        proc.wait()
+        return out + err
+    
+    def _read(self, file):
+        """ Reads file and returns its content """
+        if (exists(file)):
+            f = open(file, 'r')
+            data = f.read()
+            f.close()
+            return data
+        else:
+            return None
+        
+    def _removeCdHitTempFiles(self):
+        """ Remove .clstr files """
+        for file in glob.glob('HPV*.clstr'):
+            os.remove(file)
 
 # Running
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-logging.info("Starting")
+log = logging.getLogger("hpv")
+startTime = time.time()
+log.info("Starting")
 hpvAnalyser = HpvAnalyser()
 
-logging.info("Generating query")
+log.info("Generating query")
 hpvAnalyser.generateEntrezQuery()
 
-logging.info("Retrieving Ids")
+log.info("Retrieving Ids")
 hpvAnalyser.retrieveIds()
 
-logging.info("Retrieving Corrfinates for gene")
+log.info("Retrieving Corrfinates for gene")
 hpvAnalyser.retrieveData()
+
+hpvAnalyser._removeCdHitTempFiles()
+
+log.info("Removing duplicates")
+hpvAnalyser.removeDuplicates()
+
+log.info("Finished: " + str(round(time.time() - startTime)) + " seconds") 
