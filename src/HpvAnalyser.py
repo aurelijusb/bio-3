@@ -1,9 +1,8 @@
 # Bioinformatics, task 3.2
 #
 # @author: Aurelijus Banelis 
-from Bio import Entrez
+from Bio import AlignIO, Entrez
 from Bio.Align.Applications import MafftCommandline
-from Bio import AlignIO
 from genericpath import exists
 import glob
 import itertools
@@ -13,6 +12,7 @@ import re
 import subprocess
 import textwrap
 import time
+import sys
 
 class HpvAnalyser:
     # Configuration
@@ -27,17 +27,29 @@ class HpvAnalyser:
     log = logging.getLogger("hpv")
     mafft_exe = "/usr/bin/mafft --localpair --maxiterate 1000"
     mafft_lib = "/usr/lib/mafft/lib/mafft"
-    
+    probe_size = 30
+    probe_approximation = 5
+    bases = ['A', 'C', 'T', 'G']
     
     # Properties
     _query = '';
     _ids = []
     _count = 0
     _web_env = None
-    query_key = None
+    _query_key = None
     _unaligned_file = ''
     _aligned_file = 'HPV-aligned.fa'
     _sequences = []
+    _conversations = {                      # Data structure:
+                      'all':{},             #  _var[type][x][bp] = count
+                      'harmfull':{},        #  type = all | harmfull | safe 
+                      'safe':{}             #  bp = A | C | T | G
+                     }                      #  x - column in sequnce
+    _gaps = {       
+             'all':{},                      # Data structure:
+             'harmfull':{},                 #  _var[type][x] = count
+             'safe':{}                      #  x - column in sequnce
+            }
 
     
     # Main routine
@@ -67,10 +79,14 @@ class HpvAnalyser:
         else:
             self.log.info("Using cached alignment")
 
-        self.log.info("Analysing sequences")
+        self.log.info("Loading sequences for analysis")
         self.load_aligned()
-        self._show_sequences()
-
+        self.show_sequences()
+        
+        self.log.info("Calculating similarity")
+        self.update_convervation()
+        self.show_conservations()
+        
         difference = round(time.time() - startTime, 3)            
         self.log.info("Finished: " + str(difference) + " seconds") 
     
@@ -100,7 +116,7 @@ class HpvAnalyser:
         self._count = int(record["Count"])
         self._ids = record["IdList"]
         self._web_env = record["WebEnv"]
-        self.query_key = record["QueryKey"] 
+        self._query_key = record["QueryKey"] 
         handle.close()
         
     def retrieve_data(self):
@@ -116,7 +132,7 @@ class HpvAnalyser:
                                          retmode="text", retstart=start,
                                          retmax=self.batch_size,
                                          webenv=self._web_env,
-                                         query_key=self.query_key)
+                                         query_key=self._query_key)
             combined_gen_bank = fetch_handle.read()
             fetch_handle.close()
             for i, text in enumerate(combined_gen_bank.split("\n//\n")):
@@ -258,11 +274,98 @@ class HpvAnalyser:
         """
         self._sequences = AlignIO.read(self._aligned_file, "fasta")
 
-    def _show_sequences(self):
+    def show_sequences(self):
+        """ Showing aligned sequences with their HPV type.
+        """
         for record in self._sequences:
             hpv_type = self._get_type(record.description)
-            self.log.info("[%02d] %s\t%s" % (hpv_type, record.seq, record.id))
+            print "[%02d] %s\t%s\t%s" % (hpv_type, record.seq,
+                           record.id, record.description)
+            
+    def update_convervation(self):
+        """ Caclulates similarity and gaps over all, harmfull and safe
+            sequences. Resultas are saved to _conversations and _gaps.
+        """
+        # Default values
+        categories = ['harmfull', 'safe']
+        for category in categories + ['all']:
+            self._conversations[category] = {}
+            self._gaps[category] = {}
+            for x in range(0, len(self._sequences[0])):
+                self._conversations[category][x] = {}
+                for base in self.bases:
+                    self._conversations[category][x][base] = 0
+                self._gaps[category][x] = 0
+        
+        # Calculating and saving
+        for x in range(0, len(self._sequences[0])):
+            for y in range(0, len(self._sequences)):
+                hpv_type = self._get_type(self._sequences[y].description)
+                if (hpv_type in self.harmfull):
+                    category = 'harmfull'
+                else:
+                    category = 'safe'
+                base = self._sequences[y,x].upper()
+                if (base == '-'):
+                    self._gaps[category][x] += 1
+                    self._gaps['all'][x] += 1
+                else:
+                    self._conversations[category][x][base] += 1
+                    self._conversations['all'][x][base] += 1
+                    
+    def show_conservations(self):
+        """ Showing conservations horizontally bellow printed sequences.
+        """
+        print "Conservations"
+        categories = ['harmfull', 'safe', 'all']
+        for category in categories:
+            for base in self.bases:
+                for part in range(0, 2):
+                    sys.stdout.write('     ')
+                    for x in range(0, len(self._sequences[0])):
+                        number = self._conversations[category][x][base]
+                        symbol = self._get_numeral(number, 1 - part)
+                        sys.stdout.write(symbol)
+                    sys.stdout.write("\n")
+                n = len(self._sequences[0]) / (len(category) + 6)
+                for x in range(0, n):
+                    sys.stdout.write(category + '##' + base + '###')
+                sys.stdout.write("\n")
 
+        print "Gaps"
+        for category in categories:
+            for part in range(0, 2):
+                sys.stdout.write('     ')
+                for x in range(0, len(self._sequences[0])):
+                    number = self._gaps[category][x]
+                    symbol = self._get_numeral(number, 1 - part)
+                    sys.stdout.write(symbol)
+                sys.stdout.write("\n")
+            n = len(self._sequences[0]) / (len(category) + 3)
+            for x in range(0, n):
+                sys.stdout.write(category + '###')
+            sys.stdout.write("\n")
+    
+    def _get_numeral(self, number, part):
+        """ Gets symbol from number decimal representation.
+        """
+        if (part == 0):
+            symbol = str(number % 10)
+            min = 10
+        elif (part == 1):
+            symbol = str(number / 10 % 10)
+            min = 100
+        elif (part == 2):
+            symbol = str(number / 100 % 10)
+            min = 1000
+        elif (part == 3):
+            symbol = str(number / 1000 % 10)
+            min = 10000
+        else:
+            symbol = '?'
+        if (symbol == '0' and number < min):
+            symbol = ' '
+        return symbol
 
 # Running from command line
 if __name__ == '__main__':
