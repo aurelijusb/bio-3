@@ -13,7 +13,7 @@ import subprocess
 import textwrap
 import time
 import sys
-import pickle, pprint
+import pickle
 
 class HpvAnalyser:
     # Configuration
@@ -41,20 +41,11 @@ class HpvAnalyser:
     _unaligned_file = ''
     _aligned_file = 'HPV-aligned.fa'
     _sequences = []
-    _conservations = {                      # Data structure:
-                      'all':{},             #  _var[type][x][bp] = count
-                      'harmfull':{},        #  type = all | harmfull | safe 
-                      'safe':{}             #  bp = A | C | T | G
-                     }                      #  x - column in sequnce
-    _gaps = {       
-             'all':{},                      # Data structure:
-             'harmfull':{},                 #  _var[type][x] = count
-             'safe':{}                      #  x - column in sequnce
-            }
     _categories = ['harmful', 'safe', 'gaps_harmful', 'gaps_safe']
     
     _similarity = {}                        # {_categories}[x][y] = similarity
     _counts = {'harmful':0, 'safe':0}
+    _candidates = {}                        # [] = [y, x1, x2]
     
     # Main routine
     def main(self):
@@ -62,7 +53,7 @@ class HpvAnalyser:
         startTime = time.time()
         self.log.info("Starting")
 
-        if (not exists('HPV-aligned.fa')):
+        if (not exists('HPV81.fa')):
             self.log.info("Generating _query")
             self.generate_entrez_query()
             
@@ -71,7 +62,8 @@ class HpvAnalyser:
             
             self.log.info("Retrieving Corrfinates for gene")
             self.retrieve_data()
-            
+        
+        if (not exists('HPV-aligned.fa')):    
             self.log.info("Removing duplicates")
             self.remove_duplicates()
             
@@ -89,11 +81,11 @@ class HpvAnalyser:
         
         self.log.info("Calculating similarity")
         self.update_conservation()
-#        self.show_conservations()
-        
         
         self.log.info("Candidates")
-        self.get_candidates()
+        self.update_candidates()
+        
+        self.show_gui()
         
         difference = round(time.time() - startTime, 3)            
         self.log.info("Finished: " + str(difference) + " seconds") 
@@ -218,8 +210,8 @@ class HpvAnalyser:
             input_file = self._fasta_name(hpv_type)
             output_file = self._fasta_name(hpv_type, self.cd_hit_extension)
             self.log.info("CD-HIT for " + input_file)
-            return self._run(self.cdhit + ' -i ' + input_file + ' -o ' + \
-                              output_file)
+            self._run(self.cdhit + ' -i ' + input_file + ' -o ' + \
+                      output_file)
         self._removeCdHitTempFiles()
         
     def _run(self, program, arguments=''): 
@@ -273,8 +265,10 @@ class HpvAnalyser:
                                        input=self._unaligned_file)
         stdout, stderr = mafft_cline()
         handle = open(result_file, "w")
-        handle.write(stdout + stderr)
+        handle.write(stdout)
         handle.close()
+        if (stderr):
+            print stderr    
         self._aligned_file = result_file
     
     def load_aligned(self):
@@ -292,6 +286,7 @@ class HpvAnalyser:
 
     def update_conservation(self):
         """ Caclulates similarity each sequence symbol with safe and harmful.
+            TODO: only harmfull
         """
         # Harful / safe counts
         n_y = len(self._sequences)
@@ -333,7 +328,7 @@ class HpvAnalyser:
                     for y2 in range(0, n_y):
                         if (y != y2):
                             symbol = self._sequences[y2,x].upper()
-                            hpv_type = self._get_type(self._sequences[y]
+                            hpv_type = self._get_type(self._sequences[y2]
                                                             .description)
                             gap = (symbol == '-')
                             same = (base == symbol)
@@ -373,6 +368,17 @@ class HpvAnalyser:
                         symbol = self._get_numeral(number, 1 - part)
                         sys.stdout.write(symbol)
                     sys.stdout.write("\n")
+                    
+    def show_gui(self):
+        """ Showing conservation in GUI
+        """
+        self.log.info("Launching GUI")
+        gui = PyApp()
+        gui.set_sequences(self._sequences)
+        gui.set_conservation(self._similarity)
+        gui.set_count(self._counts['harmful'])
+        gui.set_candidates(self._candidates)
+        gui.run();
                 
     def _short_category(self, category):
         """ 4 symbol short name for category
@@ -403,37 +409,172 @@ class HpvAnalyser:
             symbol = ' '
         return symbol
         
-    def get_candidates(self):
+    def update_candidates(self):
         """ Returning best candidates for probes
             FIXME: not finished
         """
         n_harmful = self._counts['harmful']
         n_x = len(self._sequences[0])
-        ramp_harmful = n_harmful - 1
-        ramp_safe = 2 
+        ramp_harmful = n_harmful - 7
+        ramp_safe = 5
+        self._candidates = []
         for y in range(0, n_harmful):
             print str(y) + ': '
             last_good = 0
+            gaps_passed = 0
             for x in range(0, n_x):
-                harmful = self._similarity['harmful'][x][y] >= ramp_harmful
-                not_safe = self._similarity['safe'][x][y] <= ramp_safe
-                if (harmful and not_safe):
-                    last_good += 1
-                elif (last_good > 25):
-                    print '[',
-                    for i in range(x - last_good, x):
-                        sys.stdout.write(self._sequences[y,i])
-                    print ']',
-                    last_good = 0
+                gap = (self._sequences[y,x] == '-')
+                if (not gap): 
+                    harmful = self._similarity['harmful'][x][y] >= ramp_harmful
+                    not_safe = self._similarity['safe'][x][y] <= ramp_safe
+                    if (harmful and not_safe):
+                        last_good += 1
+                    elif (last_good > 25):
+                        if (last_good > 35):
+                            last_good = 35
+                        print '[',
+                        for i in range(x - last_good - gaps_passed, x):
+                            sys.stdout.write(self._sequences[y,i])
+                        print ']',
+                        candidate = [y, x - last_good - gaps_passed, x]
+                        self._candidates.append(candidate)
+                        last_good = 0
+                        gaps_passed = 0
+                    else:
+                        last_good = 0
+                        gaps_passed = 0
                 else:
-                    last_good = 0
+                    gaps_passed += 1
             print ''
                 
 
+import gtk
+import cairo
+class PyApp(gtk.Window):
+    sequences = None
+    cr = None
+
+    def __init__(self):
+        super(PyApp, self).__init__()
+        
+        self.set_title("GUI")
+        self.set_size_request(1500, 300)
+        self.set_position(gtk.WIN_POS_CENTER)
+        self.connect("destroy", gtk.main_quit)
+
+    def run(self):
+        darea = gtk.DrawingArea()
+        darea.connect("expose-event", self.expose)
+        darea.connect("motion_notify_event", self.motion_notify_event)
+        darea.set_events(gtk.gdk.EXPOSURE_MASK \
+                        | gtk.gdk.LEAVE_NOTIFY_MASK \
+                        | gtk.gdk.POINTER_MOTION_MASK \
+                        | gtk.gdk.POINTER_MOTION_HINT_MASK)
+        school = gtk.ScrolledWindow()
+        if (self.sequences):
+            width = len(self.sequences[0]) * 10
+            height = len(self.sequences) * 10
+            darea.set_size_request(width, height)
+        school.add_with_viewport(darea)
+        self.add(school)
+
+        self.show_all()
+        gtk.main()
+
+    def set_sequences(self, sequences):
+        self.sequences = sequences
+    
+    def set_conservation(self, conservation):
+        self.conservations = conservation
+        
+    def set_count(self, harmful):
+        self.n_harmful = harmful
+                
+    def set_candidates(self, candidates):
+        self.candidates = candidates
+    
+    def expose(self, widget, event):
+        cr = widget.window.cairo_create()
+        cr.set_font_size(10)
+        colors = {'A':[1.0, 0.8, 0.8],
+                 'C':[0.8, 1.0, 0.8],
+                 'T':[0.8, 0.8, 1.0],
+                 'G':[0.9, 0.6, 0.9],
+                 '-':[1.0, 1.0, 1.0]
+                 }
+
+        n_x = len(self.sequences[0])
+        n_y = len(self.sequences)
+        for x in range(0, n_x):
+            for y in range(0, n_y):
+                # Fills by base
+                color = colors[self.sequences[y,x].upper()]
+                cr.set_source_rgb(color[0], color[1], color[2])
+                cr.rectangle(x * 10, y * 10, 9, 9)
+                cr.fill()
+        
+        cr.set_source_rgb(1.0, 0.0, 0.0)
+        cr.rectangle(0, self.n_harmful * 10 - 1, n_x * 10, 2)
+        cr.fill()
+
+        # Bar by conservation
+        cr.set_source_rgb(0.1, 0.0, 0.0)
+        n_safe = n_y - self.n_harmful
+        for x in range(0, n_x):
+            for y in range(0, self.n_harmful):
+                harm = self.conservations['harmful'][x][y]
+                safe = self.conservations['safe'][x][y]
+                gap = (self.sequences[y,x] == '-')
+                candidate = (harm / float(self.n_harmful) >
+                            safe / float(n_safe))
+                if (not gap and candidate):
+                    cr.rectangle(x * 10 - 2, y * 10, 10, 10)
+        cr.set_line_width(1)
+        cr.stroke()
+        
+        # Candidates
+        cr.set_source_rgba(0.0, 0.4, 0.0, 0.3)
+        for candidate in self.candidates:
+            y, x1, x2 = candidate
+            cr.rectangle(x1 * 10 - 1, y * 10, (x2 - x1) * 10, 10)
+            cr.rectangle(x1 * 10 - 1, (n_y + 1) * 10, (x2 - x1) * 10, 4)
+        cr.fill()
+        
+        
+        # Text by base
+        cr.set_source_rgb(0.1, 0.1, 0.1)
+        for x in range(0, n_x):
+            for y in range(0, n_y):
+                cr.move_to(x * 10, y * 10 + 10)
+                cr.show_text(str(self.sequences[y,x]))
+                
+
+    def motion_notify_event(self,widget, event):
+        x, y, state = event.window.get_pointer()
+        x = int(x / 10)
+        y = int(y / 10)
+        n_x = len(self.sequences[0])
+        n_y = len(self.sequences)
+        if (x < n_x and y < n_y and x >= 0 and y >= 0):
+            symbol = self.sequences[y,x]
+            harm = self.conservations['harmful'][x][y]
+            safe = self.conservations['safe'][x][y]
+            gap_harm = self.conservations['gaps_harmful'][x][y]
+            gap_safe = self.conservations['gaps_safe'][x][y]
+            if (y < self.n_harmful):
+                type = "H"
+            else:
+                type = "S"
+            self.set_title("%s %s (%d, %d): %d - %d Harm-safe | Gaps: %d %d" %
+                           (type, symbol, x, y, harm, safe, gap_harm, gap_safe))
+        else:
+            self.set_title("GUI")
+            
+         
+            
+    
 # Running from command line
 if __name__ == '__main__':
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
     hpv_analyser = HpvAnalyser()
     hpv_analyser.main()
-    
-    
