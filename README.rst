@@ -12,6 +12,7 @@ Libraries and external tools
  * BioPython http://biopython.org/wiki/Main_Page
  * CD-HIT http://weizhong-lab.ucsd.edu/cd-hit/
  * MAfft http://mafft.cbrc.jp/alignment/software/
+ * matplotlib http://matplotlib.org/
 
 TODO
 ----
