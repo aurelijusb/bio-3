@@ -13,6 +13,7 @@ import subprocess
 import textwrap
 import time
 import sys
+import pickle, pprint
 
 class HpvAnalyser:
     # Configuration
@@ -53,6 +54,7 @@ class HpvAnalyser:
     _categories = ['harmful', 'safe', 'gaps_harmful', 'gaps_safe']
     
     _similarity = {}                        # {_categories}[x][y] = similarity
+    _counts = {'harmful':0, 'safe':0}
     
     # Main routine
     def main(self):
@@ -87,8 +89,11 @@ class HpvAnalyser:
         
         self.log.info("Calculating similarity")
         self.update_conservation()
-        self.show_conservations()
-        self.consensus()
+#        self.show_conservations()
+        
+        
+        self.log.info("Candidates")
+        self.get_candidates()
         
         difference = round(time.time() - startTime, 3)            
         self.log.info("Finished: " + str(difference) + " seconds") 
@@ -284,77 +289,32 @@ class HpvAnalyser:
             hpv_type = self._get_type(record.description)
             print "[%02d] %s\t%s\t%s" % (hpv_type, record.seq,
                            record.id, record.description)
-            
-    def _OLD_update_conservation(self):
-        """ Caclulates similarity and gaps over all, harmfull and safe
-            sequences. Resultas are saved to _conservations and _gaps.
-        """
-        # Default values
-        categories = ['harmfull', 'safe']
-        for category in categories + ['all']:
-            self._conservations[category] = {}
-            self._gaps[category] = {}
-            for x in range(0, len(self._sequences[0])):
-                self._conservations[category][x] = {}
-                for base in self.bases:
-                    self._conservations[category][x][base] = 0
-                self._gaps[category][x] = 0
-        
-        # Calculating and saving
-        for x in range(0, len(self._sequences[0])):
-            for y in range(0, len(self._sequences)):
-                hpv_type = self._get_type(self._sequences[y].description)
-                if (hpv_type in self.harmfull):
-                    category = 'harmfull'
-                else:
-                    category = 'safe'
-                base = self._sequences[y,x].upper()
-                if (base == '-'):
-                    self._gaps[category][x] += 1
-                    self._gaps['all'][x] += 1
-                else:
-                    self._conservations[category][x][base] += 1
-                    self._conservations['all'][x][base] += 1
-                    
-    def _OLD_show_conservations1(self):
-        """ Showing conservations horizontally bellow printed sequences.
-        """
-        print "Conservations"
-        categories = ['harmfull', 'safe', 'all']
-        for category in categories:
-            for base in self.bases:
-                for part in range(0, 2):
-                    sys.stdout.write('     ')
-                    for x in range(0, len(self._sequences[0])):
-                        number = self._conservations[category][x][base]
-                        symbol = self._get_numeral(number, 1 - part)
-                        sys.stdout.write(symbol)
-                    sys.stdout.write("\n")
-                n = len(self._sequences[0]) / (len(category) + 6)
-                for x in range(0, n):
-                    sys.stdout.write(category + '##' + base + '###')
-                sys.stdout.write("\n")
-
-        print "Gaps"
-        for category in categories:
-            for part in range(0, 2):
-                sys.stdout.write('     ')
-                for x in range(0, len(self._sequences[0])):
-                    number = self._gaps[category][x]
-                    symbol = self._get_numeral(number, 1 - part)
-                    sys.stdout.write(symbol)
-                sys.stdout.write("\n")
-            n = len(self._sequences[0]) / (len(category) + 3)
-            for x in range(0, n):
-                sys.stdout.write(category + '###')
-            sys.stdout.write("\n")
 
     def update_conservation(self):
         """ Caclulates similarity each sequence symbol with safe and harmful.
         """
-        # Default vaules
+        # Harful / safe counts
         n_y = len(self._sequences)
         n_x = len(self._sequences[0])
+        self._counts['safe'] = 0
+        self._counts['harmful'] = 0
+        for y in range(0, n_y):
+            hpv_type = self._get_type(self._sequences[y].description)
+            if (hpv_type in self.safe):
+                self._counts['safe'] += 1
+            else:
+                self._counts['harmful'] += 1
+        
+        # Loading from catch
+        cache = 'conservations.pkl' 
+        if (exists(cache)):
+            self.log.info("Loading conservations from cache")
+            pkl_file = open(cache, 'rb')
+            self._similarity = pickle.load(pkl_file)
+            pkl_file.close()
+            return;
+        
+        # Default vaules
         for category in self._categories:
             self._similarity[category] = {}
             for x in range(0, n_x):
@@ -391,6 +351,12 @@ class HpvAnalyser:
                                 
                             if (category != None):
                                 self._similarity[category][x][y] += 1
+        
+        # Caching
+        self.log.info("Saving conservations to cache")
+        output = open(cache, 'wb')
+        pickle.dump(self._similarity, output)
+        output.close()
         
     def show_conservations(self):
         """ Showing conservations horizontally bellow printed sequences.
@@ -437,91 +403,37 @@ class HpvAnalyser:
             symbol = ' '
         return symbol
         
-#    def show_conservations_png(self, file):
-#        import pylab
-#        categories = ['harmfull', 'safe', 'all']
-#        for category in categories:
-#            for base in self.bases:
-#                numbers = []
-#                for x in range(0, len(self._sequences[0])):
-#                    number = self._conservations[category][x][base]
-#                    numbers.append(number)
-#                pylab.plot(numbers)
-#        pylab.savefig(file)
-        
-    def consensus(self):
-        from Bio.Align import AlignInfo
-        summary_align = AlignInfo.SummaryInfo(self._sequences)
-        consensus = summary_align.dumb_consensus(ambiguous = '-')
-        print type(consensus)
-        print '   ', consensus
-        
+    def get_candidates(self):
+        """ Returning best candidates for probes
+            FIXME: not finished
+        """
+        n_harmful = self._counts['harmful']
+        n_x = len(self._sequences[0])
+        ramp_harmful = n_harmful - 1
+        ramp_safe = 2 
+        for y in range(0, n_harmful):
+            print str(y) + ': '
+            last_good = 0
+            for x in range(0, n_x):
+                harmful = self._similarity['harmful'][x][y] >= ramp_harmful
+                not_safe = self._similarity['safe'][x][y] <= ramp_safe
+                if (harmful and not_safe):
+                    last_good += 1
+                elif (last_good > 25):
+                    print '[',
+                    for i in range(x - last_good, x):
+                        sys.stdout.write(self._sequences[y,i])
+                    print ']',
+                    last_good = 0
+                else:
+                    last_good = 0
+            print ''
+                
 
 # Running from command line
 if __name__ == '__main__':
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
     hpv_analyser = HpvAnalyser()
     hpv_analyser.main()
-
-#FIXME: implement via features:
-#from Bio import SeqIO
-#Entrez.email = "aurelijus@banelis.lt"     # Always tell NCBI who you are
-#handle = Entrez.efetch(db="nucleotide", id="186972394", rettype="gb", retmode="text")
-#record = SeqIO.read(handle, "gb")
-#print "%s, length %i, with %i features" % (record.name, len(record), len(record.features))
-#for feature in record.features:
-#    print feature   
-#Bio.SeqFeature.SeqFeature
-
-#import gtk
-#import math
-#
-#class PyApp(gtk.Window):
-#
-#    def __init__(self):
-#        super(PyApp, self).__init__()
-#
-#        self.set_title("Simple drawing")
-#        self.resize(230, 150)
-#        self.set_position(gtk.WIN_POS_CENTER)
-#
-#        self.connect("destroy", gtk.main_quit)
-#
-#        darea = gtk.DrawingArea()
-#        darea.connect("expose-event", self.expose)
-#        self.add(darea)
-#
-#        self.show_all()
-#    
-#    def expose(self, widget, event):
-#        cr = widget.window.cairo_create()
-##        cr.set_source_rgb(0.7, 0.2, 0.0)
-##        for i in range(0, 200, 20):
-##            cr.rectangle(i, 0, 19, 19)
-##        cr.fill() 
-#        cr.set_source_rgb(0.0, 0.0, 0.0)
-#        cr.set_font_size(1.2)
-#        x_bearing, y_bearing, width, height = cr.text_extents("a")[:4]
-#        cr.move_to(0.5 - width / 2 - x_bearing, 0.5 - height / 2 - y_bearing)
-#        cr.show_text("a")
-#        
-##        cr = widget.window.cairo_create()
-##
-##        cr.set_line_width(9)
-##        cr.set_source_rgb(0.7, 0.2, 0.0)
-##                
-##        w = self.allocation.width
-##        h = self.allocation.height
-##
-##        cr.translate(w/2, h/2)
-##        cr.arc(0, 0, 50, 0, 2*math.pi)
-##        cr.stroke_preserve()
-##        
-##        cr.set_source_rgb(0.3, 0.4, 0.6)
-##        cr.fill()
-#    
-#
-#PyApp()
-#gtk.main()
     
     

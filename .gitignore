@@ -8,3 +8,5 @@ debug*
 src/HPV*.fa
 docs/
 src/out
+*.pkl
+src/*.png
