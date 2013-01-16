@@ -1,7 +1,7 @@
 # Bioinformatics, task 3.2
 #
 # @author: Aurelijus Banelis 
-from Bio import AlignIO, Entrez
+from Bio import AlignIO, Entrez, SeqIO
 from Bio.Align.Applications import MafftCommandline
 from genericpath import exists
 import glob
@@ -75,10 +75,18 @@ class HpvAnalyser:
         else:
             self.log.info("Using cached alignment")
 
+        # FIXME: debug mode
+        self.brute_force()
+        
+        difference = round(time.time() - startTime, 3)            
+        self.log.info("Finished: " + str(difference) + " seconds") 
+        
+        return
+        
         self.log.info("Loading sequences for analysis")
         self.load_aligned()
         self.show_sequences()
-        
+
         self.log.info("Calculating similarity")
         self.update_conservation()
         
@@ -87,13 +95,15 @@ class HpvAnalyser:
         
         self.show_gui()
         
-        difference = round(time.time() - startTime, 3)            
-        self.log.info("Finished: " + str(difference) + " seconds") 
+
     
     
     # Methods
     def generate_entrez_query(self):
         """ Saves and returns _query to get information about all HPV types.
+        
+            FIXME: rezult example:
+            "Human papillomavirus type 18"[Organism] AND L1[Gene Name] AND 7000:8000[Sequence Length]
         """
         ending = ') AND ' + self.gene + '[Gene Name] ' + \
                  'AND 1000:8000[Sequence Length]'
@@ -446,11 +456,120 @@ class HpvAnalyser:
                 else:
                     gaps_passed += 1
             print ''
-                
+            
+    def brute_force(self):
+        self._load_unaligned()
+#        self._print_unaligned()
+
+    def _load_unaligned(self):
+        self._unaligned = list(SeqIO.parse('HPV-all.fa', "fasta"))
+        self._update_types()
+        self.log.info("Unaligned:")
+        self._print_unaligned()
+        self._results = []
+        self._size = 15
+        self._errors = 2
+        self.log.info("Rcursion")
+        self._n_harful = 7
+        for i in range(0, 7):
+            self.log.info("==== %d =====" % i);
+            self._first = i
+            self._results = []
+            self._brute_force_recurce()
+            self.log.info("Results:")
+            self._show_results()
+            
+
+    def _print_unaligned(self):
+        for i, sequence in enumerate(self._unaligned):
+            hpv_type = self._types[i]
+            harm = hpv_type in self.harmfull
+            harm2 = i <= self._n_harful
+            assert (harm == harm2)
+
+    def _update_types(self):
+        self._types = []
+        self._n_harful = None
+        for i, sequence in enumerate(self._unaligned):
+            hpv_type = self._get_type(sequence.description)
+            print hpv_type, sequence.description
+            if (hpv_type in self.safe and self._n_harful == None):
+                self._n_harful = i - 1
+            self._types.append(hpv_type)
+
+    def _test_data(self):
+        self._unaligned = ["ABCDEFGHJKL",
+                           "---aBcDEFGHJKL",
+                           "EFGHJKL"
+                           ]
+            
+    def _brute_force_recurce(self, x1 = 0, y2 = -1):
+        """ Searching similarities amond all sequences
+        """
+        size = self._size
+        errors = self._errors
+        original = self._unaligned[self._first].seq
+        current = self._unaligned[y2].seq
+        parts = 10
+       
+        if (y2 == -1):
+            # First sequence
+            n_x = len(original) - size + 1
+            for x1 in range(0, n_x):
+                if (x1 % round(n_x / float(parts)) == 0):
+                    self.log.info("Comparing %d%%" % (x1 / float(n_x) * 100))
+                if (self._first == 0):
+                    start = 1
+                else:
+                    start = 0
+                self._brute_force_recurce(x1, start)
+        else:
+            # Following sequences
+            for i in range(0, len(current) - size + 1):
+                if (self._compare(original, x1, current, i, size, errors)):
+                    self._results.append([x1, y2, i])
+                    if (y2 + 1 == self._first):
+                        start = y2 + 2
+                    else:
+                        start = y2 + 1 
+                    if (start < len(self._unaligned)):
+                        self._brute_force_recurce(x1, start)
+            
+            
+    def _compare(self, list1, x1, list2, x2, length, errors):
+        """ Comapre 2 list with allowed error rate
+        """
+        if (len(list1) < x1 + length or len(list2) < x2 + length):
+            return False
+        difference = 0
+        for i in range(0, length):
+            if (list1[x1 + i] != list2[x2 + i]):
+                difference += 1
+            if (difference > errors):
+                return False
+        return True
+    
+    def _show_results(self):
+        print len(self._results)
+        for result in self._results:
+            x1, y2, x2 = result
+            source = self._unaligned[self._first].seq[x1:x1 + self._size]
+            destination = self._unaligned[y2].seq[x2:x2 + self._size]
+            if (y2 == len(self._unaligned)-1):
+                arrow = '->  '
+                print "%s(%d, %d) (%d, %d) %s %s" % (arrow, self._first, x1, y2,
+                                                 x2, source, destination)
+            else:
+                arrow = '\t'
+            
+
 
 import gtk
 import cairo
 class PyApp(gtk.Window):
+    """ Sequence alignemt visualization
+    """
+    
     sequences = None
     cr = None
 
@@ -494,6 +613,8 @@ class PyApp(gtk.Window):
         self.candidates = candidates
     
     def expose(self, widget, event):
+        """ Painting
+        """
         cr = widget.window.cairo_create()
         cr.set_font_size(10)
         colors = {'A':[1.0, 0.8, 0.8],
