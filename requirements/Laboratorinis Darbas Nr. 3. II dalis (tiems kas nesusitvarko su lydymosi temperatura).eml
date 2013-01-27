@@ -1,0 +1,208 @@
+X-Account-Key: account1
+X-UIDL: UID3862-1322662302
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:                                                                                 
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on ltvnsplsk9.hostex.lt
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=4.0 tests=FREEMAIL_FROM,HTML_MESSAGE,
+	T_DKIM_INVALID,T_TO_NO_BRKTS_FREEMAIL autolearn=ham version=3.3.2
+Received: (qmail 20394 invoked from network); 11 Dec 2012 15:37:30 +0200
+Received: from kedras.tautvydas.lt (109.235.64.141)
+  by ltvnsplsk9.hostex.lt with SMTP; 11 Dec 2012 15:37:30 +0200
+Received-SPF: neutral (ltvnsplsk9.hostex.lt: 109.235.64.141 is neither permitted nor denied by SPF record at _spf.google.com)
+Received: from mail-bk0-f50.google.com ([209.85.214.50])
+	by kedras.tautvydas.lt with esmtps (TLSv1:RC4-SHA:128)
+	(Exim 4.67)
+	(envelope-from <aurelijus.eta.banelis+caf_=admin=wapsite.lt@gmail.com>)
+	id 1TiQ1Z-0005GT-Io
+	for admin@wapsite.lt; Tue, 11 Dec 2012 15:37:29 +0200
+Received: by mail-bk0-f50.google.com with SMTP id jf3so1551456bkc.9
+        for <admin@wapsite.lt>; Tue, 11 Dec 2012 05:37:29 -0800 (PST)
+Received: by 10.204.151.21 with SMTP id a21mr6399048bkw.124.1355233048874;
+        Tue, 11 Dec 2012 05:37:28 -0800 (PST)
+X-Forwarded-To: admin@wapsite.lt
+X-Forwarded-For: aurelijus.eta.banelis@gmail.com admin@wapsite.lt
+Delivered-To: aurelijus.eta.banelis@gmail.com
+Received: by 10.205.126.135 with SMTP id gw7csp6340bkc;
+        Tue, 11 Dec 2012 05:37:27 -0800 (PST)
+Received-SPF: pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBBFPOTSDAKGQEISENUGY@googlegroups.com designates 10.49.75.195 as permitted sender) client-ip=10.49.75.195
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBBFPOTSDAKGQEISENUGY@googlegroups.com designates 10.49.75.195 as permitted sender) smtp.mail=mifbioinfo12+bncBD7OLRGN3EPBBFPOTSDAKGQEISENUGY@googlegroups.com; dkim=pass header.i=mifbioinfo12+bncBD7OLRGN3EPBBFPOTSDAKGQEISENUGY@googlegroups.com
+Received: from mr.google.com ([10.49.75.195])
+        by 10.49.75.195 with SMTP id e3mr3964861qew.24.1355233046490 (num_hops = 1);
+        Tue, 11 Dec 2012 05:37:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=20120806;
+        h=x-beenthere:date:from:to:message-id:subject:mime-version
+         :x-original-sender:precedence:mailing-list:list-id:x-google-group-id
+         :list-post:list-help:list-archive:sender:list-subscribe
+         :list-unsubscribe:content-type;
+        bh=Kjwi401TxESqysAefEVu+bbrYTcwo4P3V9dqceYhUkg=;
+        b=wwi/pEVEeQLUSe0GB+EFtJi3MzqnPRW0jbGr4DrG/btwnoYmHUkFDFPKL12F4Y9lxr
+         8RJItCE9+zWE7IX2UTekwUCtOvAJ7hRZWejLAKNKs7pN7HmqxJewu2aGJbI3SuFXyXgd
+         SDk4bC+ineJNy6QHkHpq7yAVPiakwcsQnBpUSElfHEHYMq93Tl2KAa1/BA0I/mWOqVtU
+         Ax8CBcmuwxK0u40nzMBDKRK0s3XKrM7lj+NSyz2u966XJHuwxJhd/Z8bsvSyEFkV+e8f
+         GQMvQ0NBAEFpbdLd+FzHzX9XHSz5+HBGwOLyZER7Kv563k/bnl1l5P7l9e0ZLsZ/qa0X
+         3Vjg==
+Received: by 10.49.75.195 with SMTP id e3mr3964861qew.24.1355233046469;
+        Tue, 11 Dec 2012 05:37:26 -0800 (PST)
+X-BeenThere: mifbioinfo12@googlegroups.com
+Received: by 10.49.0.84 with SMTP id 20ls306973qec.58.gmail; Tue, 11 Dec 2012
+ 05:37:25 -0800 (PST)
+Received: by 10.49.48.41 with SMTP id i9mr3909768qen.36.1355233045073;
+        Tue, 11 Dec 2012 05:37:25 -0800 (PST)
+Date: Tue, 11 Dec 2012 05:37:24 -0800 (PST)
+From: Gediminas Alzbutas <galzbutas@gmail.com>
+To: mifbioinfo12@googlegroups.com
+Message-Id: <dddac471-fcf8-4e91-909f-0e7e888ec5a3@googlegroups.com>
+Subject: =?UTF-8?Q?Laboratorinis_Darbas_Nr._3._II_dalis_(tiem?=
+ =?UTF-8?Q?s_kas_nesusitvarko_su_lydymosi_temperat=C5=ABra)?=
+MIME-Version: 1.0
+X-Original-Sender: galzbutas@gmail.com
+Precedence: list
+Mailing-list: list mifbioinfo12@googlegroups.com; contact mifbioinfo12+owners@googlegroups.com
+List-ID: <mifbioinfo12.googlegroups.com>
+X-Google-Group-Id: 205955717138
+List-Post: <http://groups.google.com/group/mifbioinfo12/post?hl=en>, <mailto:mifbioinfo12@googlegroups.com>
+List-Help: <http://groups.google.com/support/?hl=en>, <mailto:mifbioinfo12+help@googlegroups.com>
+List-Archive: <http://groups.google.com/group/mifbioinfo12?hl=en>
+Sender: mifbioinfo12@googlegroups.com
+List-Subscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>, <mailto:mifbioinfo12+subscribe@googlegroups.com>
+List-Unsubscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>,
+ <mailto:googlegroups-manage+205955717138+unsubscribe@googlegroups.com>
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_163_7002908.1355233044822"
+
+------=_Part_163_7002908.1355233044822
+Content-Type: text/plain; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+Sveiki,
+Galb=FBt daugeliui lydymosi temperat=FBra per daug komplikuoja suvokim=E0.
+Pateiku u=FEduot=E1 be jos.
+
+U=FEduotis=20
+
+
+Parinkti probi=F8 sistem=E0, kurioje b=FBt=F8 kuo ma=FEiau probi=F8, taip k=
+ad:
+1. Vis=F8 probi=F8 ilgis b=FBt=F8 30=B15 bazi=F8 por=F8 (bp).
+2. Kiekvienai didelio pavojingumo papilomos viruso sekai tur=EBt=F8 b=FBti =
+bent=20
+po vien=E0 prob=E6 rinkinyje, taip kad tarp jos ir viruso sekos b=FBt=F8 NE=
+daugiau=20
+nei 2 nesutapimai.
+3. Visos prob=EBs tur=EBt=F8 bent po 3 nesutapimus su VISOMIS nepavojing=F8=
+ virus=F8=20
+sekomis.
+4. Regionas, i=F0 kurio parenkamos prob=EBs netur=EBt=F8 b=FBti ilgesnis ne=
+i 60 bp.=20
+
+Atsiskaitymas: preliminariai sausio 4-t=E0 bei 6-t=E0 =FEod=FEiu.
+
+
+ =20
+Link=EBjimai,
+Gediminas=20
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+mifbioinfo12" group.
+To post to this group, send email to mifbioinfo12@googlegroups.com.
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.
+For more options, visit https://groups.google.com/groups/opt_out.
+
+
+
+------=_Part_163_7002908.1355233044822
+Content-Type: text/html; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+Sveiki,<div>Galb=FBt daugeliui lydymosi temperat=FBra per daug komplikuoja =
+suvokim=E0.</div><div>Pateiku u=FEduot=E1 be jos.</div><div><h3 class=3D"we=
+stern"><font color=3D"#222222"><font face=3D"Arial, Helvetica, sans-serif">=
+<font size=3D"3"><br></font></font></font></h3><h3 class=3D"western">
+<font color=3D"#222222"><font face=3D"Arial, Helvetica, sans-serif"><font s=
+ize=3D"3">U=FEduotis</font></font></font></h3>
+<p style=3D"margin-bottom: 0in; border-style: none; padding: 0in;">
+<br><font color=3D"#222222"><font face=3D"Arial, Helvetica, sans-serif"><fo=
+nt size=3D"2" style=3D"font-size: 9pt">Parinkti
+probi=F8 sistem=E0, kurioje b=FBt=F8 kuo ma=FEiau probi=F8, taip kad:</font=
+></font></font><br><font color=3D"#222222"><font face=3D"Arial, Helvetica, =
+sans-serif"><font size=3D"2" style=3D"font-size: 9pt">1.
+Vis=F8 probi=F8 ilgis b=FBt=F8 </font></font></font><font color=3D"#222222"=
+><font face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font=
+-size: 9pt"><span lang=3D"en-US">30</span></font></font></font><font color=
+=3D"#222222"><font face=3D"Segoe UI"><font size=3D"2" style=3D"font-size: 9=
+pt"><span lang=3D"en-US">=B1</span></font></font></font><font color=3D"#222=
+222"><font face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"=
+font-size: 9pt"><span lang=3D"en-US">5
+ bazi</span></font></font></font><font color=3D"#222222"><font face=3D"Aria=
+l, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9pt"><span l=
+ang=3D"lt-LT">=F8
+por=F8 (bp).</span></font></font></font><br><font color=3D"#222222"><font f=
+ace=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9=
+pt">2.
+Kiekvienai didelio pavojingumo papilomos viruso sekai tur=EBt=F8 b=FBti
+bent po vien=E0 prob=E6 rinkinyje, </font></font></font><font color=3D"#222=
+222"><font face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"=
+font-size: 9pt"><span lang=3D"en-US">taip
+kad </span></font></font></font><font color=3D"#222222"><font face=3D"Arial=
+, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9pt">
+</font></font></font><font color=3D"#222222"><font face=3D"Arial, Helvetica=
+, sans-serif"><font size=3D"2" style=3D"font-size: 9pt"><span lang=3D"en-US=
+">tarp
+jos ir viruso sekos </span></font></font></font><font color=3D"#222222"><fo=
+nt face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-siz=
+e: 9pt"><span lang=3D"lt-LT">b=FBt=F8
+NEdaugiau nei </span></font></font></font><font color=3D"#222222"><font fac=
+e=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9pt=
+"><span lang=3D"en-US">2
+nesutapimai.</span></font></font></font><br><font color=3D"#222222"><font f=
+ace=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9=
+pt">3.
+</font></font></font><font color=3D"#222222"><font face=3D"Arial, Helvetica=
+, sans-serif"><font size=3D"2" style=3D"font-size: 9pt"><span lang=3D"en-US=
+">Visos
+</span></font></font></font><font color=3D"#222222"><font face=3D"Arial, He=
+lvetica, sans-serif"><font size=3D"2" style=3D"font-size: 9pt"><span lang=
+=3D"lt-LT">prob=EBs
+tur=EBt=F8 bent po </span></font></font></font><font color=3D"#222222"><fon=
+t face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-size=
+: 9pt"><span lang=3D"en-US">3
+nesutapimus su VISOMIS </span></font></font></font><font color=3D"#222222">=
+<font face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-=
+size: 9pt"><span lang=3D"lt-LT">nepavojing=F8
+virus=F8 sekomis.</span></font></font></font><br><font color=3D"#222222"><f=
+ont face=3D"Arial, Helvetica, sans-serif"><font size=3D"2" style=3D"font-si=
+ze: 9pt">4.
+Regionas, i=F0 kurio parenkamos prob=EBs netur=EBt=F8 b=FBti ilgesnis nei
+60 bp. </font></font></font><br><br>Atsiskaitymas: preliminariai sausio 4-t=
+=E0 bei 6-t=E0 =FEod=FEiu.</p>
+<p style=3D"margin-bottom: 0in; border-style: none; padding: 0in;">
+<br>
+</p>
+<p style=3D"margin-bottom: 0in; border-style: none; padding: 0in;">
+<font color=3D"#222222">
+</font><br><font color=3D"#222222"><font face=3D"Arial, Helvetica, sans-ser=
+if"><font size=3D"2" style=3D"font-size: 9pt">Link=EBjimai,</font></font></=
+font><br><font color=3D"#222222"><font face=3D"Arial, Helvetica, sans-serif=
+"><font size=3D"2" style=3D"font-size: 9pt">Gediminas</font></font></font>
+</p></div>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;mifbioinfo12&quot; group.<br />
+To post to this group, send email to mifbioinfo12@googlegroups.com.<br />
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.<br />
+For more options, visit <a href=3D"https://groups.google.com/groups/opt_out=
+">https://groups.google.com/groups/opt_out</a>.<br />
+&nbsp;<br />
+&nbsp;<br />
+
+------=_Part_163_7002908.1355233044822--
+

@@ -1,0 +1,185 @@
+X-Account-Key: account1
+X-UIDL: UID3746-1322662302
+X-Mozilla-Status: 0001
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys: $label1                                                                         
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on ltvnsplsk9.hostex.lt
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=4.0 tests=FREEMAIL_FROM,HTML_MESSAGE,
+	T_DKIM_INVALID,T_TO_NO_BRKTS_FREEMAIL autolearn=ham version=3.3.2
+Received: (qmail 10204 invoked from network); 27 Nov 2012 14:51:15 +0200
+Received: from kedras.tautvydas.lt (109.235.64.141)
+  by ltvnsplsk9.hostex.lt with SMTP; 27 Nov 2012 14:51:15 +0200
+Received-SPF: neutral (ltvnsplsk9.hostex.lt: 109.235.64.141 is neither permitted nor denied by SPF record at _spf.google.com)
+Received: from mail-bk0-f50.google.com ([209.85.214.50])
+	by kedras.tautvydas.lt with esmtps (TLSv1:RC4-SHA:128)
+	(Exim 4.67)
+	(envelope-from <aurelijus.eta.banelis+caf_=admin=wapsite.lt@gmail.com>)
+	id 1TdKd9-0004d2-1v
+	for admin@wapsite.lt; Tue, 27 Nov 2012 14:51:15 +0200
+Received: by mail-bk0-f50.google.com with SMTP id jf3so4876512bkc.9
+        for <admin@wapsite.lt>; Tue, 27 Nov 2012 04:51:14 -0800 (PST)
+Received: by 10.204.12.203 with SMTP id y11mr4567842bky.27.1354020674032;
+        Tue, 27 Nov 2012 04:51:14 -0800 (PST)
+X-Forwarded-To: admin@wapsite.lt
+X-Forwarded-For: aurelijus.eta.banelis@gmail.com admin@wapsite.lt
+Delivered-To: aurelijus.eta.banelis@gmail.com
+Received: by 10.204.227.71 with SMTP id iz7csp452273bkb;
+        Tue, 27 Nov 2012 04:51:12 -0800 (PST)
+Received-SPF: pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBBP7O2KCQKGQEI4HX2WY@googlegroups.com designates 10.49.116.1 as permitted sender) client-ip=10.49.116.1
+Authentication-Results: mr.google.com; spf=pass (google.com: domain of mifbioinfo12+bncBD7OLRGN3EPBBP7O2KCQKGQEI4HX2WY@googlegroups.com designates 10.49.116.1 as permitted sender) smtp.mail=mifbioinfo12+bncBD7OLRGN3EPBBP7O2KCQKGQEI4HX2WY@googlegroups.com; dkim=pass header.i=mifbioinfo12+bncBD7OLRGN3EPBBP7O2KCQKGQEI4HX2WY@googlegroups.com
+Received: from mr.google.com ([10.49.116.1])
+        by 10.49.116.1 with SMTP id js1mr3143257qeb.19.1354020671864 (num_hops = 1);
+        Tue, 27 Nov 2012 04:51:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlegroups.com; s=20120806;
+        h=x-beenthere:date:from:to:message-id:subject:mime-version
+         :x-original-sender:precedence:mailing-list:list-id:x-google-group-id
+         :list-post:list-help:list-archive:sender:list-subscribe
+         :list-unsubscribe:content-type;
+        bh=7vmqdSvPi+D/KtgT/jJAwThgfRaanqg2LMQLlypx6CU=;
+        b=aFE1C8R7HPRgV9eMZghgtp1AhxjAXdiXuHM20zfHaYlmJ4oBJG6W2HoGkPRMYjDLsI
+         u6cGASs5MB/sRmR/iSaU6nFVJWKFQsFo5p+ZvHfafBCtYS4tnC08plFaSXdBFrzhV3t5
+         l+dJAyQ/k82AHwHTG84a+/T/xv5B5w8s3Qiu3BP5PB3+nHQgg/DorrByg13dScQjUGOf
+         DUR5//R6uUTuKSoyt/m6djWvQgzstfQIo9ZrKydQ82ue5cgVes8F9tvBN1BnWQpsQ2Pm
+         sjCnaRUovs1YDZccuDKkNnsg72d9g3WUJWQ5AwHUGHlrE9XHWHq5JGRR3y7cfCq3OSlY
+         u9Yw==
+Received: by 10.49.116.1 with SMTP id js1mr3143257qeb.19.1354020671851;
+        Tue, 27 Nov 2012 04:51:11 -0800 (PST)
+X-BeenThere: mifbioinfo12@googlegroups.com
+Received: by 10.49.107.35 with SMTP id gz3ls2261107qeb.52.gmail; Tue, 27 Nov
+ 2012 04:51:11 -0800 (PST)
+Received: by 10.49.71.135 with SMTP id v7mr3154623qeu.28.1354020671605;
+        Tue, 27 Nov 2012 04:51:11 -0800 (PST)
+Date: Tue, 27 Nov 2012 04:51:11 -0800 (PST)
+From: Gediminas Alzbutas <galzbutas@gmail.com>
+To: mifbioinfo12@googlegroups.com
+Message-Id: <528555b2-ff09-4048-97ec-e71e2550481f@googlegroups.com>
+Subject: Laboratorinis Darbas Nr. 3. II dalis.
+MIME-Version: 1.0
+X-Original-Sender: galzbutas@gmail.com
+Precedence: list
+Mailing-list: list mifbioinfo12@googlegroups.com; contact mifbioinfo12+owners@googlegroups.com
+List-ID: <mifbioinfo12.googlegroups.com>
+X-Google-Group-Id: 205955717138
+List-Post: <http://groups.google.com/group/mifbioinfo12/post?hl=en>, <mailto:mifbioinfo12@googlegroups.com>
+List-Help: <http://groups.google.com/support/?hl=en>, <mailto:mifbioinfo12+help@googlegroups.com>
+List-Archive: <http://groups.google.com/group/mifbioinfo12?hl=en>
+Sender: mifbioinfo12@googlegroups.com
+List-Subscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>, <mailto:mifbioinfo12+subscribe@googlegroups.com>
+List-Unsubscribe: <http://groups.google.com/group/mifbioinfo12/subscribe?hl=en>,
+ <mailto:googlegroups-manage+205955717138+unsubscribe@googlegroups.com>
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_25_12408169.1354020671332"
+
+------=_Part_25_12408169.1354020671332
+Content-Type: text/plain; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+
+
+*Laboratorinis Darbas Nr. 3. II dalis.*
+
+
+=20
+ U=FEduotis
+Parinkti probi=F8 sistem=E0, kurioje b=FBt=F8 kuo ma=FEiau probi=F8, taip k=
+ad:
+1. Vis=F8 probi=F8 sek=F8 lydymosi temperat=FBra tur=EBt=F8 nesiskirti daug=
+iau nei 5=20
+laipsniais (rekomenduojamas ilgis 15-30 bp)
+2. Kiekvienai didelio pavojingumo papilomos viruso sekai tur=EBt=F8 b=FBti =
+bent=20
+po vien=E0 prob=E6 j=F8 rinkinyje, kurios lydymosi temperat=FBra ant viruso=
+ sekos=20
+b=FBt=F8 ne ma=FEesn=EB nei 60 laipsni=F8 (virusas bus detektuojamas).
+3. Vis=F8 probi=F8 lydymosi temperat=FBra ant   ma=FEo pavojingumo viruso s=
+ekos=20
+netur=EBt=F8 b=FBti daugiau nei 55 laipsniai.
+4. Regionas, i=F0 kurio parenkamos prob=EBs netur=EBt=F8 b=FBti ilgesnis ne=
+i 60bp.=20
+Rekomenduojamas probi=F8 ilgis 15-30 bp (virusas bus nedetektuojamas).
+
+Lydymosi temperat=FBrai apskai=E8iuoti rekomenduoju program=E0=20
+http://sourceforge.net/projects/melting/.
+Prad=EBti rekomenduoju nuo funkcijos, kurios parametrai b=FBt=F8 dvi sekos:=
+=20
+prilydom=E0 seka ir sek=E0 ant kurios bus lydoma ir ji paskai=E8iuot=F8 lyd=
+ymosi=20
+temperat=FBr=E0 paleisdama melting program=E0.
+O poto j=FBs=F8 fantazijos reikalas.
+
+Daugiau paai=F0kinsiu per susitikim=E0.
+Link=EBjimai,
+Gediminas
+
+=20
+
+
+=20
+=20
+
+=20
+
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+mifbioinfo12" group.
+To post to this group, send email to mifbioinfo12@googlegroups.com.
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.
+For more options, visit https://groups.google.com/groups/opt_out.
+
+
+
+------=_Part_25_12408169.1354020671332
+Content-Type: text/html; charset=ISO-8859-13
+Content-Transfer-Encoding: quoted-printable
+
+<p style=3D"margin-bottom:0cm" align=3D"CENTER"><b>Laboratorinis Darbas
+Nr. 3.  II dalis.</b></p>
+<p style=3D"margin-bottom:0cm" align=3D"CENTER"><br>
+</p>
+<p style=3D"margin-bottom:0cm" align=3D"CENTER"><br>
+</p>
+<h3>U=FEduotis</h3><br>Parinkti probi=F8 sistem=E0, kurioje b=FBt=F8 kuo ma=
+=FEiau probi=F8, taip kad:<br>1. Vis=F8 probi=F8 sek=F8 lydymosi temperat=
+=FBra tur=EBt=F8 nesiskirti daugiau nei 5 laipsniais (rekomenduojamas ilgis=
+ 15-30 bp)<br>2. Kiekvienai didelio pavojingumo papilomos viruso sekai tur=
+=EBt=F8 b=FBti bent po vien=E0 prob=E6 j=F8 rinkinyje, kurios lydymosi temp=
+erat=FBra ant viruso sekos b=FBt=F8 ne ma=FEesn=EB nei 60 laipsni=F8 (virus=
+as bus detektuojamas).<br>3. Vis=F8 probi=F8 lydymosi temperat=FBra ant&nbs=
+p;&nbsp; ma=FEo pavojingumo viruso sekos netur=EBt=F8 b=FBti daugiau nei 55=
+ laipsniai.<br>4. Regionas, i=F0 kurio parenkamos prob=EBs netur=EBt=F8 b=
+=FBti ilgesnis nei 60bp. Rekomenduojamas probi=F8 ilgis 15-30 bp (virusas b=
+us nedetektuojamas).<br><br>Lydymosi temperat=FBrai apskai=E8iuoti rekomend=
+uoju program=E0 http://sourceforge.net/projects/melting/.<br>Prad=EBti reko=
+menduoju nuo funkcijos, kurios parametrai b=FBt=F8 dvi sekos: prilydom=E0 s=
+eka ir sek=E0 ant kurios bus lydoma ir ji paskai=E8iuot=F8 lydymosi tempera=
+t=FBr=E0 paleisdama melting program=E0.<br>O poto j=FBs=F8 fantazijos reika=
+las.<br><br>Daugiau paai=F0kinsiu per susitikim=E0.<br>Link=EBjimai,<br>Ged=
+iminas<br><br>&nbsp;<br><p style=3D"margin-bottom:0cm" align=3D"LEFT"><br>
+</p>
+<p style=3D"margin-bottom:0cm" align=3D"LEFT"><br>
+</p>
+<p><br><br>
+</p>
+<h3><br></h3>
+<p><br><br>
+</p>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;mifbioinfo12&quot; group.<br />
+To post to this group, send email to mifbioinfo12@googlegroups.com.<br />
+To unsubscribe from this group, send email to mifbioinfo12+unsubscribe@goog=
+legroups.com.<br />
+For more options, visit <a href=3D"https://groups.google.com/groups/opt_out=
+">https://groups.google.com/groups/opt_out</a>.<br />
+&nbsp;<br />
+&nbsp;<br />
+
+------=_Part_25_12408169.1354020671332--
+

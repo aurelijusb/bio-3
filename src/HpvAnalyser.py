@@ -485,6 +485,7 @@ class HpvAnalyser:
             hpv_type = self._types[i]
             harm = hpv_type in self.harmfull
             harm2 = i <= self._n_harful
+            print hpv_type, harm, sequence.seq
             assert (harm == harm2)
 
     def _update_types(self):
@@ -532,8 +533,48 @@ class HpvAnalyser:
                         start = y2 + 2
                     else:
                         start = y2 + 1 
-                    if (start < len(self._unaligned)):
+                    if (start < self._n_harful - 1):
                         self._brute_force_recurce(x1, start)
+
+    def _brute_force_check_exists(self, original, x1, level = None):
+        size = self._size
+        errors = 3
+        
+        if (level == None):
+            level = self._n_harful
+        
+        current = self._unaligned[level]
+        for x in range(0, len(current) - size + 1):
+            if (self._compare(original, x1, original, x, size, errors)):
+                return True
+#        if (level + 1 < leself._unaligned )
+        
+#        original = self._unaligned[self._first].seq
+#        current = self._unaligned[y2].seq
+#        parts = 10
+       
+#        if (y2 == -1):
+#            # First sequence
+#            n_x = len(original) - size + 1
+#            for x1 in range(0, n_x):
+#                if (x1 % round(n_x / float(parts)) == 0):
+#                    self.log.info("Comparing %d%%" % (x1 / float(n_x) * 100))
+#                if (self._first == 0):
+#                    start = 1
+#                else:
+#                    start = 0
+#                self._brute_force_recurce(x1, start)
+#        else:
+#            # Following sequences
+#            for i in range(0, len(current) - size + 1):
+#                if (self._compare(original, x1, current, i, size, errors)):
+#                    self._results.append([x1, y2, i])
+#                    if (y2 + 1 == self._first):
+#                        start = y2 + 2
+#                    else:
+#                        start = y2 + 1 
+#                    if (start < self._n_harful - 1):
+#                        self._brute_force_recurce(x1, start)
             
             
     def _compare(self, list1, x1, list2, x2, length, errors):
@@ -555,13 +596,14 @@ class HpvAnalyser:
             x1, y2, x2 = result
             source = self._unaligned[self._first].seq[x1:x1 + self._size]
             destination = self._unaligned[y2].seq[x2:x2 + self._size]
-            if (y2 == len(self._unaligned)-1):
+            fromLast = (self._first == self._n_harful-2) and \
+                       (2 == self._n_harful - 2)
+            if (y2 == self._n_harful-1 or fromLast):
                 arrow = '->  '
-                print "%s(%d, %d) (%d, %d) %s %s" % (arrow, self._first, x1, y2,
-                                                 x2, source, destination)
             else:
                 arrow = '\t'
-            
+            print "%s(%d, %d) (%d, %d) %s %s" % (arrow, self._first, x1, y2,
+                                 x2, source, destination)
 
 
 import gtk
